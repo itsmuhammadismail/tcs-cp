@@ -76,7 +76,7 @@ a {
   @apply font-semibold text-lg;
 }
 
-@media screen and (min-width: 1800px) {
+@media screen and (min-width: 1600px) {
   .media {
     max-width: 95rem;
   }
@@ -135,6 +135,18 @@ a {
   }
 }
 
+@-webkit-keyframes level {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes level {
+  from {
+    width: 0;
+  }
+}
+
 .up-animation {
   -webkit-animation: upArrow 1s ease infinite;
           animation: upArrow 1s ease infinite;
@@ -145,6 +157,11 @@ a {
           animation: downArrow 1s ease infinite;
 }
 
+.level-animate {
+  -webkit-animation: level 2.75s ease;
+          animation: level 2.75s ease;
+}
+
 .css-1f2kitb-MuiDateRangePickerDay-root,
 .css-1h14vs8-MuiDateRangePickerDay-root,
 .css-1m3meum-MuiDateRangePickerDay-root {
@@ -152,7 +169,11 @@ a {
 }
 
 .css-1esf796-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
-.css-1l0bo0r-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected {
+.css-1l0bo0r-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
+.css-jgke5a-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
+.css-18fxmqw-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
+.css-pgdzhj-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
+.css-jwafdq-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected {
   background-color: #b5b5c3 !important;
 }
 
@@ -162,14 +183,18 @@ a {
 }
 
 .css-dmmspl-MuiFormGroup-root {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+      -ms-flex-direction: row !important;
+          flex-direction: row !important;
 }
 
 .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
-  color: #e45b65;
+  color: #e45b65 !important;
+}
+
+.ant-drawer-body {
+  padding: 0 !important;
 }
 
 .input {
@@ -182,5 +207,21 @@ a {
 
 .label {
   @apply w-[7.2rem] text-right text-xs;
+}
+
+.button-hover:hover {
+  background-color: #ebebeb !important;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.iconClass {
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.button-hover:hover .iconClass {
+  -webkit-filter: invert(47%) sepia(100%) saturate(5194%) hue-rotate(338deg) brightness(86%) contrast(125%);
+          filter: invert(47%) sepia(100%) saturate(5194%) hue-rotate(338deg) brightness(86%) contrast(125%);
 }
 /*# sourceMappingURL=globals.css.map */

@@ -7,52 +7,25 @@ import Searchbar from "./Searchbar";
 import Link from "next/link";
 
 const Header = () => {
-  const [state, setState] = useState({
-    right: false,
-  });
-  const [profileState, setProfileState] = useState({
-    right: false,
-  });
-  // const [menuState, setMenuState] = useState({
-  //   left: false,
-  // });
+  
 
   // Menu Drawer
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
   };
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
+  // Notification Drawer
+  const [notiVisible, setNotiVisible] = useState(false);
+  const showNotiDrawer = () => {
+    setNotiVisible(true);
   };
-  const toggleProfileDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setProfileState({ ...state, [anchor]: open });
+  // Profile Drawer
+  const [profileVisible, setProfileVisible] = useState(false);
+  const showProfileDrawer = () => {
+    setProfileVisible(true);
   };
-  const toggleMenuDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
 
-    setMenuState({ ...state, [anchor]: open });
-  };
+  
 
   return (
     <header className="border-b">
@@ -64,18 +37,22 @@ const Header = () => {
             className="h-6 mr-[2rem] 2xl:absolute left-[1rem]"
             onClick={showDrawer}
           />
-          <img src="/logo.svg" alt="" className="h-8" />
+          <Link href="/">
+            <a>
+              <img src="/logo.svg" alt="" className="h-8" />
+            </a>
+          </Link>
           <Searchbar />
         </div>
         <div className="flex gap-2">
           <Link href="/booking">
             <a>
-            <Button
-              text="Booking"
-              width="10rem"
-              bgColor="#303C4B"
-              color="white"
-            />
+              <Button
+                text="Booking"
+                width="10rem"
+                bgColor="#303C4B"
+                color="white"
+              />
             </a>
           </Link>
           <Button
@@ -85,18 +62,29 @@ const Header = () => {
             bgColor="#F3F6F9"
             color="black"
           />
-          <div className="" onClick={toggleDrawer("right", true)}>
-            <Button icon="/icons/bell.svg" width="2.8rem" bgColor="#F3F6F9" />
+          <div className="" onClick={showNotiDrawer}>
+            <Button
+              icon="/icons/bell.svg"
+              width="2.8rem"
+              bgColor="#F3F6F9"
+              className="button-hover"
+              iconClass="iconClass"
+            />
           </div>
-          <div className="" onClick={toggleProfileDrawer("right", true)}>
-            <Button icon="/icons/person.svg" width="2.8rem" bgColor="#F3F6F9" />
+          <div className="" onClick={showProfileDrawer}>
+            <Button
+              icon="/icons/person.svg"
+              width="2.8rem"
+              bgColor="#F3F6F9"
+              className="button-hover"
+              iconClass="iconClass"
+            />
           </div>
         </div>
       </div>
-      <NotificationDrawer state={state["right"]} toggleDrawer={toggleDrawer} />
+      <NotificationDrawer visible={notiVisible} setVisible={setNotiVisible} />
       <ProfileDrawer
-        state={profileState["right"]}
-        toggleDrawer={toggleProfileDrawer}
+        visible={profileVisible} setVisible={setProfileVisible}
       />
       <MenuDrawer visible={visible} setVisible={setVisible} />
     </header>

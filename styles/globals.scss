@@ -87,7 +87,7 @@ a {
   @apply font-semibold text-lg;
 }
 
-@media screen and (min-width: 1800px) {
+@media screen and (min-width: 1600px) {
   .media {
     max-width: 95rem;
   }
@@ -122,12 +122,22 @@ a {
   }
 }
 
+@keyframes level {
+  from {
+    width: 0;
+  }
+}
+
 .up-animation {
   animation: upArrow 1s ease infinite;
 }
 
 .down-animation {
   animation: downArrow 1s ease infinite;
+}
+
+.level-animate {
+  animation: level 2.75s ease;
 }
 
 .css-1f2kitb-MuiDateRangePickerDay-root,
@@ -137,7 +147,11 @@ a {
 }
 
 .css-1esf796-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
-.css-1l0bo0r-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected {
+.css-1l0bo0r-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
+.css-jgke5a-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
+.css-18fxmqw-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
+.css-pgdzhj-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
+.css-jwafdq-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected {
   background-color: #b5b5c3 !important;
 }
 .css-1esf796-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected:hover,
@@ -145,10 +159,15 @@ a {
   background-color: #b5b5c3 !important;
 }
 .css-dmmspl-MuiFormGroup-root {
-  flex-direction: row;
+  flex-direction: row !important;
 }
 .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
-  color: #e45b65;
+  color: #e45b65 !important;
+}
+
+// Ant Drawer
+.ant-drawer-body {
+  padding: 0 !important;
 }
 
 .input {
@@ -159,4 +178,15 @@ a {
 }
 .label {
   @apply w-[7.2rem] text-right text-xs;
+}
+.button-hover:hover {
+  background-color: #ebebeb !important;
+  transition: all 0.25s ease;
+}
+.iconClass {
+  transition: all 0.25s ease;
+}
+.button-hover:hover .iconClass {
+  filter: invert(47%) sepia(100%) saturate(5194%) hue-rotate(338deg)
+    brightness(86%) contrast(125%);
 }

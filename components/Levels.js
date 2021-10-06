@@ -4,7 +4,7 @@ const Level = ({ color, percent }) => {
       <div className=" bg-[#E4E8EE] rounded-full w-full h-full"></div>
       <div
         style={{ backgroundColor: color, width: `${percent}%` }}
-        className="absolute rounded-full top-0  h-full"
+        className="absolute rounded-full top-0  h-full level-animate"
       ></div>
     </div>
   );

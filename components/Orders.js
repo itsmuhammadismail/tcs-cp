@@ -13,7 +13,7 @@ const Orders = () => {
   return (
     <div
       style={{ backgroundColor: "#F3F6F9" }}
-      className="flex flex-col flex-1 rounded-2xl gap-1 min-w-[17rem]  border-0 py-4 px-6 orders-height"
+      className="flex flex-col flex-1 rounded-2xl gap-1 min-w-[17rem]   border-0 py-4 px-6 orders-height"
     >
       <div className="flex justify-between">
         <h1 className="heading">Shipment Details</h1>
@@ -33,8 +33,8 @@ const Orders = () => {
           />
         </div>
       </div>
-      <div className="flex justify-center items-center">
-        <div className="flex-1 h-[20rem]	">
+      <div className="flex justify-center ">
+        <div className="flex-1 	">
           <PieChart />{" "}
         </div>
         <DetailedView />

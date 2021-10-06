@@ -18,7 +18,7 @@ const Button2 = ({
     >
       {icon && <img src={icon} className="h-[1rem]" />}
       {text && <span>{text}</span>}
-      {icon && <img src={rightIcon} className="h-[0.5rem] ml-2" />}
+      {rightIcon && <img src={rightIcon} className="h-[0.5rem] ml-2" />}
     </button>
   );
 };
