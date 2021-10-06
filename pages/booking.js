@@ -8,8 +8,9 @@ import Shipments from "../components/Bookings/Shipments";
 import SingleBookingDropdown from "../components/SingleBookingDropdown";
 import { useState } from "react";
 
-const booking = () => {
-  const [dropdown, setDropdown] = useState(false);
+const Booking = () => {
+  let a = 1;
+  const [dropdown, setDropdown] = useState();
   const handleDropdown = () => {
     dropdown ? setDropdown(false) : setDropdown(true);
   };
@@ -64,4 +65,4 @@ const booking = () => {
     </div>
   );
 };
-export default booking;
+export default Booking;
