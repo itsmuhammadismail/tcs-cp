@@ -218,6 +218,10 @@ a {
   @apply w-[7.2rem] text-right text-xs;
 }
 
+.label2 {
+  @apply w-[11.3rem] text-right text-xs;
+}
+
 .button-hover:hover {
   background-color: #ebebeb !important;
   -webkit-transition: all 0.25s ease;

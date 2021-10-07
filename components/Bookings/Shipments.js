@@ -81,9 +81,9 @@ const Shipments = () => {
             </select>
           </div>
         </div>
-        <div className="flex-1 flex flex-col gap-3">
+        <div className="flex-1 flex flex-col gap-3 ">
           <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">
+            <label className="label2">
               Origin <span className="text-[#FF0000]">*</span>
             </label>
             <select type="text" className="input text-[#464E5F] text-sm">
@@ -91,7 +91,7 @@ const Shipments = () => {
             </select>
           </div>
           <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">
+            <label className="label2">
               Services <span className="text-[#FF0000]">*</span>
             </label>
             <select type="text" className="input text-[#464E5F] text-sm">
@@ -99,29 +99,29 @@ const Shipments = () => {
             </select>
           </div>
           <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">Insurance/Declared Value</label>
+            <label className="label2">Insurance/Declared Value</label>
             <input type="text" className="input" />
           </div>
           <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">
+            <label className="label2">
               Shipment Details <span className="text-[#FF0000]">*</span>
             </label>
             <input type="text" className="input" />
           </div>
           <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">
+            <label className="label2">
               Remarks <span className="text-[#FF0000]">*</span>
             </label>
             <input type="text" className="input" />
           </div>
           <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">
+            <label className="label2">
               Width(inches) <span className="text-[#FF0000]">*</span>
             </label>
             <input type="text" className="input2" />
           </div>
           <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">
+            <label className="label2">
               Print Option <span className="text-[#FF0000]">*</span>
             </label>
             <select type="text" className="input text-[#464E5F] text-sm">
