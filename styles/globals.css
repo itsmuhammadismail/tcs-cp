@@ -164,7 +164,10 @@ a {
 
 .css-1f2kitb-MuiDateRangePickerDay-root,
 .css-1h14vs8-MuiDateRangePickerDay-root,
-.css-1m3meum-MuiDateRangePickerDay-root {
+.css-1m3meum-MuiDateRangePickerDay-root,
+.css-v8yvmi,
+.css-1aln1w9,
+.css-q5pafz {
   background-color: #f3f6f9 !important;
 }
 
@@ -175,10 +178,7 @@ a {
 .css-pgdzhj-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
 .css-jwafdq-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
 .css-v8kfk3,
-.css-iwfapa,
-.css-v8yvmi,
-.css-1aln1w9,
-.css-q5pafz {
+.css-iwfapa {
   background-color: #b5b5c3 !important;
 }
 
