@@ -179,8 +179,7 @@ a {
 .css-jwafdq-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected,
 .css-v8kfk3,
 .css-iwfapa,
-.css-wxg6um.Mui-selected,
-.css-wxg6um {
+.MuiDateRangePickerDay-rangeIntervalPreview button {
   background-color: #b5b5c3 !important;
 }
 
