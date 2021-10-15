@@ -202,3 +202,6 @@ a {
   filter: invert(47%) sepia(100%) saturate(5194%) hue-rotate(338deg)
     brightness(86%) contrast(125%);
 }
+.requiredField {
+  @apply text-xs mt-1 text-[#FF0000];
+}

@@ -7,8 +7,6 @@ import Searchbar from "./Searchbar";
 import Link from "next/link";
 
 const Header = () => {
-  
-
   // Menu Drawer
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
@@ -24,8 +22,6 @@ const Header = () => {
   const showProfileDrawer = () => {
     setProfileVisible(true);
   };
-
-  
 
   return (
     <header className="border-b">
@@ -45,7 +41,7 @@ const Header = () => {
           <Searchbar />
         </div>
         <div className="flex gap-2">
-          <Link href="/booking">
+          <Link href="/booking/single-booking">
             <a>
               <Button
                 text="Booking"
@@ -83,9 +79,7 @@ const Header = () => {
         </div>
       </div>
       <NotificationDrawer visible={notiVisible} setVisible={setNotiVisible} />
-      <ProfileDrawer
-        visible={profileVisible} setVisible={setProfileVisible}
-      />
+      <ProfileDrawer visible={profileVisible} setVisible={setProfileVisible} />
       <MenuDrawer visible={visible} setVisible={setVisible} />
     </header>
   );
