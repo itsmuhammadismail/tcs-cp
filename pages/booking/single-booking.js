@@ -17,7 +17,7 @@ const Bookings = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    watch, 
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);

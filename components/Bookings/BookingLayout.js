@@ -23,6 +23,15 @@ const BookingLayout = () => {
       case "/booking/pickup-request":
         setName("Pickup Request");
         break;
+      case "/booking/cancel-booking":
+        setName("Cancel Booking");
+        break;  
+      case "/booking/generate-loadsheet":
+        setName("Generate Loadsheet");
+        break;
+        case "/booking/complain-request":
+          setName("Complain/Service Request");
+          break;
     }
   }, [pathname]);
 
