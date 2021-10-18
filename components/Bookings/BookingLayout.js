@@ -29,6 +29,9 @@ const BookingLayout = () => {
       case "/booking/generate-loadsheet":
         setName("Generate Loadsheet");
         break;
+        case "/booking/complain-request":
+          setName("Complain/Service Request");
+          break;
     }
   }, [pathname]);
 
