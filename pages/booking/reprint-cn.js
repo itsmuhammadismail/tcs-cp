@@ -31,7 +31,7 @@ const RePrintCN = () => {
         <BookingLayout />
         <div className="media mx-auto p-4 pt-2 flex gap-6">
           {/* Shipments start */}
-          <Card heading="Shipments Details">
+          <Card heading="Filters">
             <div className="flex gap-6">
               <div className="flex-1 flex flex-col gap-3 ">
                 <div className="flex-1 flex items-center gap-4 w-full">
