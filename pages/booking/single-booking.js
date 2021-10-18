@@ -2,7 +2,6 @@ import Head from "next/head";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
 
-import { useState } from "react";
 import BookingLayout from "../../components/Bookings/BookingLayout";
 import Card from "../../components/Bookings/Card";
 import {
@@ -324,23 +323,35 @@ const Bookings = () => {
                   <label className="label">
                     Height (inches) <span className="text-[#FF0000]">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="input text-[#464E5F] text-sm"
-                    {...register("height", { required: true })}
-                  ></input>
+                  <div className="flex flex-col flex-1">
+                    <input
+                      type="number"
+                      className="input text-[#464E5F] text-sm flex-1"
+                      {...register("height", { required: true })}
+                    ></input>
+                    {errors.height && (
+                      <span className="requiredField">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     Length (inches) <span className="text-[#FF0000]">*</span>
                   </label>
-                  <select
-                    type="text"
-                    className="input text-[#464E5F] text-sm"
-                    {...register("length", { required: true })}
-                  >
-                    <option value="Please Select">Please Select</option>
-                  </select>
+                  <div className="flex flex-col flex-1">
+                    <input
+                      type="number"
+                      className="input text-[#464E5F] text-sm flex-1"
+                      {...register("length", { required: true })}
+                    />
+                    {errors.length && (
+                      <span className="requiredField">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="flex-1 flex flex-col gap-3 ">
@@ -380,21 +391,35 @@ const Bookings = () => {
                   <label className="label2">
                     Shipment Details <span className="text-[#FF0000]">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="input"
-                    {...register("shipmentDetails", { required: true })}
-                  />
+                  <div className="flex flex-col flex-1">
+                    <input
+                      type="text"
+                      className="input flex-1"
+                      {...register("shipmentDetails", { required: true })}
+                    />
+                    {errors.shipmentDetails && (
+                      <span className="requiredField">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
                     Remarks <span className="text-[#FF0000]">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="input"
-                    {...register("remarks", { required: true })}
-                  />
+                  <div className="flex flex-col flex-1">
+                    <input
+                      type="text"
+                      className="input"
+                      {...register("remarks", { required: true })}
+                    />
+                    {errors.remarks && (
+                      <span className="requiredField">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
@@ -429,7 +454,9 @@ const Bookings = () => {
             bgColor="#F3F6F9"
             color="#3A3A3A"
             width="11rem"
+            type="reset"
           ></Button>
+
           <Button
             text="Save"
             bgColor="#4CAF50"

@@ -10,6 +10,7 @@ const Button2 = ({
 }) => {
   return (
     <button
+      type="button"
       onClick={onClick}
       style={{ width: width, backgroundColor: bgColor, color: color }}
       className={`rounded-2xl flex justify-center items-center text-xs gap-2 ${
