@@ -20,6 +20,9 @@ const BookingLayout = () => {
       case "/booking/reprint-cn":
         setName("Re-print CN Label");
         break;
+      case "/booking/pickup-request":
+        setName("Pickup Request");
+        break;
     }
   }, [pathname]);
 
