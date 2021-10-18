@@ -23,6 +23,9 @@ const BookingLayout = () => {
       case "/booking/pickup-request":
         setName("Pickup Request");
         break;
+      case "/booking/cancel-booking":
+        setName("Cancel Booking");
+        break;  
     }
   }, [pathname]);
 
