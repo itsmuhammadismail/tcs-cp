@@ -26,6 +26,9 @@ const BookingLayout = () => {
       case "/booking/cancel-booking":
         setName("Cancel Booking");
         break;  
+      case "/booking/generate-loadsheet":
+        setName("Generate Loadsheet");
+        break;
     }
   }, [pathname]);
 
