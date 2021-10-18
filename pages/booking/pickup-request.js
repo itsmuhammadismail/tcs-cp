@@ -129,10 +129,9 @@ const PickupRequest = () => {
                   Mobile # <span className="text-[#FF0000]">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="input"
                   {...register("customerEmail")}
-                  pattern="^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$"
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
