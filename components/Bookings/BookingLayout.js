@@ -36,10 +36,12 @@ const BookingLayout = () => {
             setName("International Booking");
         break;
 
-        case "/booking/mms-booking":
+      case "/booking/mms-booking":
           setName("MMS Booking");
-      break;  
-          
+        break;  
+      case "/booking/pouch-manifest":
+        setName("Pouch Manifest");
+        break; 
           
     }
   }, [pathname]);

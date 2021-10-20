@@ -142,6 +142,17 @@ const SingleBookingDropdown = ({ showDropdown, setShowDropdown, name }) => {
                 </li>
               </a>
             </Link>
+            <Link href="/booking/pouch-manifest">
+              <a>
+                <li
+                  className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                    name === "Pouch Manifest" && "bg-[#F3F6F9]"
+                  }`}
+                >
+                  Pouch Manifest
+                </li>
+              </a>
+            </Link>
 
           </ul>
         </div>
