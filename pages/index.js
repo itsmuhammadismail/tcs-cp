@@ -1,18 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button2 from "../components/Button2";
 import Cards from "../components/Cards";
 import DateDropdown from "../components/DateDropdown";
 import Layout from "../components/Layout";
 import Orders from "../components/Orders";
 import Payment from "../components/Payment";
+import Countries from "../api/countries";
 
 export default function Home() {
   const [dateDropdown, setDateDropdown] = useState(false);
   const handleDateDropdown = () => {
     dateDropdown ? setDateDropdown(false) : setDateDropdown(true);
   };
+
+  useEffect(async () => await Countries(), []);
+
   return (
     <div className="">
       <Head>

@@ -12,7 +12,12 @@ const Button2 = ({
     <button
       type="button"
       onClick={onClick}
-      style={{ width: width, backgroundColor: bgColor, color: color }}
+      style={{
+        minWidth: width,
+        backgroundColor: bgColor,
+        color: color,
+        padding: "0 1.3rem",
+      }}
       className={`rounded-2xl flex justify-center items-center text-xs gap-2 ${
         bgNone === true ? "" : "h-[2.8rem]"
       }`}
