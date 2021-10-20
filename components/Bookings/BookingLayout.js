@@ -35,6 +35,10 @@ const BookingLayout = () => {
       case "/booking/international-booking":
             setName("International Booking");
         break;
+
+        case "/booking/mms-booking":
+          setName("MMS Booking");
+      break;  
           
           
     }
