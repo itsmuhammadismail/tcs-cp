@@ -118,6 +118,19 @@ const SingleBookingDropdown = ({ showDropdown, setShowDropdown, name }) => {
                 </li>
               </a>
             </Link>
+    {/* SHIP 4 ME */}    
+
+            <Link href="/booking/international-booking">
+              <a>
+                <li
+                  className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                    name === "International Booking" && "bg-[#F3F6F9]"
+                  }`}
+                >
+                  International Booking
+                </li>
+              </a>
+            </Link>
           </ul>
         </div>
       )}
