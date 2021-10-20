@@ -245,7 +245,7 @@ const PouchManifest = () => {
        
         <div className="media mx-auto p-4 flex justify-center items-center gap-2">
           <Button
-            text="Refresh"
+            text="Cancel"
             bgColor="#F3F6F9"
             color="#3A3A3A"
             width="11rem"
@@ -253,7 +253,7 @@ const PouchManifest = () => {
           ></Button>
 
           <Button
-            text="Save"
+            text="Submit"
             bgColor="#4CAF50"
             color="white"
             width="11rem"
