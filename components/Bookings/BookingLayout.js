@@ -42,6 +42,18 @@ const BookingLayout = () => {
       case "/booking/pouch-manifest":
         setName("Pouch Manifest");
         break; 
+
+      case "/booking/security-scan-manifest":
+        setName("Security Scan Manifest");
+      break;   
+
+      case "/booking/security-scan-forwarding":
+        setName("Security Scan Forwarding");
+      break;
+      
+      case "/booking/security-scan-recieving":
+        setName("Security Scan Recieving");
+      break;
           
     }
   }, [pathname]);

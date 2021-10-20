@@ -153,6 +153,40 @@ const SingleBookingDropdown = ({ showDropdown, setShowDropdown, name }) => {
                 </li>
               </a>
             </Link>
+            <Link href="/booking/security-scan-manifest">
+              <a>
+                <li
+                  className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                    name === "Security Scan Manifest" && "bg-[#F3F6F9]"
+                  }`}
+                >
+                  Security Scan Manifest
+                </li>
+              </a>
+            </Link>
+            <Link href="/booking/security-scan-forwarding">
+              <a>
+                <li
+                  className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                    name === "Security Scan Forwarding" && "bg-[#F3F6F9]"
+                  }`}
+                >
+                  Security Scan Forwarding
+                </li>
+              </a>
+            </Link>
+
+            <Link href="/booking/security-scan-recieving">
+              <a>
+                <li
+                  className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                    name === "Security Scan Recieving" && "bg-[#F3F6F9]"
+                  }`}
+                >
+                  Security Scan Recieving
+                </li>
+              </a>
+            </Link>
 
           </ul>
         </div>
