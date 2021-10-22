@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const Bookings = () => {
   const {
@@ -20,6 +21,9 @@ const Bookings = () => {
     watch, 
     formState: { errors },
   } = useForm();
+
+  const [boxAvailability, setBoxAvailability] = useState("yes")
+  // const [boxAvailability, setBoxAvailability] = useState("yes")
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -114,7 +118,8 @@ const Bookings = () => {
                     className="input text-[#464E5F] text-sm"
                     {...register("deliveryType", { required: true })}
                   >
-                    <option value="Please Select">Please Select</option>
+                    <option value="Normal">Normal</option>
+                    <option value="My Collect">My Collect</option>
                   </select>
                 </div>
               </div>
@@ -244,7 +249,15 @@ const Bookings = () => {
                     className="input text-[#464E5F] text-sm"
                     {...register("pieces", { required: true })}
                   >
-                    <option value="Please Select">Please Select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
                   </select>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
@@ -440,7 +453,10 @@ const Bookings = () => {
                     className="input text-[#464E5F] text-sm"
                     {...register("printOption", { required: true })}
                   >
-                    <option value="Please Select">Please Select</option>
+                    <option value="3 copies per page">3 copies per page</option>
+                    <option value="Single copy per page">Single copy per page</option>
+                    <option value="6x4 label">6x4 label</option>
+                    <option value="3 labels per page">3 labels per page</option>
                   </select>
                 </div>
               </div>

@@ -41,7 +41,7 @@ const CancelBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("pieces", { required: true })}
+                    {...register("fromDate", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>

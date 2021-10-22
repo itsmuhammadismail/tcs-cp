@@ -9,3 +9,8 @@ export const citiesState = atom({
   key: "citiesState",
   default: [],
 });
+
+export const costcentersState = atom({
+  key: "costcentersState",
+  default: [],
+});
