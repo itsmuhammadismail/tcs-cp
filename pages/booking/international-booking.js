@@ -42,7 +42,7 @@ const IBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("pieces", { required: true })}
+                    {...register("bookingDate", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -55,7 +55,7 @@ const IBooking = () => {
                     <input
                       type="text"
                       className="input"
-                      {...register("First Name", { required: true })}
+                      {...register("firstName", { required: true })}
                     />
                     {errors.contact && (
                       <span className="requiredField">
@@ -72,7 +72,7 @@ const IBooking = () => {
                     <input
                       type="text"
                       className="input"
-                      {...register("First Name", { required: true })}
+                      {...register("lastName", { required: true })}
                     />
                     {errors.contact && (
                       <span className="requiredField">
@@ -103,7 +103,7 @@ const IBooking = () => {
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("consignee address", { required: true })}
+                      {...register("consigneeAddress", { required: true })}
                     />
                     {errors.contact && (
                       <span className="requiredField">
@@ -119,7 +119,7 @@ const IBooking = () => {
                   <input
                     type="number"
                     className="input text-[#464E5F] text-sm"
-                    {...register("printOption", { required: true })}
+                    {...register("consigneePhone#", { required: true })}
                   >
                   </input>
                 </div>
@@ -130,7 +130,7 @@ const IBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("services", { required: true })}
+                    {...register("service", { required: true })}
                   >
                     <option value="Please Select">Select DOCS</option>
                   </select>
@@ -142,7 +142,7 @@ const IBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("destination", { required: true })}
+                    {...register("city", { required: true })}
                   >
                     <option value="Please Select">Select City</option>
                     <option value="Please Select">Maldives</option>
@@ -158,7 +158,7 @@ const IBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("destination", { required: true })}
+                    {...register("volumetric", { required: true })}
                   >
                     <option value="Please Select">Select Volumetric</option>
                     <option value="Please Select">width</option>
@@ -197,7 +197,7 @@ const IBooking = () => {
                     <input
                       type="text"
                       className="input"
-                      {...register("Account Name", { required: true })}
+                      {...register("accountName", { required: true })}
                     />
                     {errors.contact && (
                       <span className="requiredField">
@@ -214,7 +214,7 @@ const IBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("services", { required: true })}
+                    {...register("account#", { required: true })}
                   >
                     <option value="Please Select">Select Account</option>
                   </select>
@@ -227,7 +227,7 @@ const IBooking = () => {
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("height", { required: true })}
+                      {...register("middleName", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -245,7 +245,7 @@ const IBooking = () => {
                   <input
                     type="number"
                     className="input text-[#464E5F] text-sm"
-                    {...register("printOption", { required: true })}
+                    {...register("reference#", { required: true })}
                   >
                   </input>
                 </div>
@@ -257,7 +257,7 @@ const IBooking = () => {
                     <input
                       type="email"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("height", { required: true })}
+                      {...register("emailId", { required: true })}
                     ></input>
                   </div>
                 </div>
@@ -269,7 +269,7 @@ const IBooking = () => {
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("address", { required: true })}
+                      {...register("consigneeAddress", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -285,7 +285,7 @@ const IBooking = () => {
                   <input
                     type="number"
                     className="input text-[#464E5F] text-sm"
-                    {...register("printOption", { required: true })}
+                    {...register("consigneeCell", { required: true })}
                   >
                   </input>
                 </div>
@@ -312,7 +312,7 @@ const IBooking = () => {
                   <input
                     type="number"
                     className="input text-[#464E5F] text-sm"
-                    {...register("zip code", { required: true })}
+                    {...register("zipCode", { required: true })}
                   >
                   </input>
                 </div>

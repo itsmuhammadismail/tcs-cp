@@ -52,7 +52,7 @@ const PickupRequest = () => {
                 <input
                   type="text"
                   className="input2 text-[#464E5F] text-sm"
-                  {...register("address")}
+                  {...register("customerName")}
                   disabled
                 />
               </div>
@@ -61,7 +61,7 @@ const PickupRequest = () => {
                 <input
                   type="text"
                   className="input2 text-[#464E5F] text-sm"
-                  {...register("address")}
+                  {...register("contactNumber")}
                   disabled
                 />
               </div>
@@ -70,7 +70,7 @@ const PickupRequest = () => {
                 <input
                   type="email"
                   className="input2 text-[#464E5F] text-sm"
-                  {...register("address")}
+                  {...register("emailAddress")}
                   disabled
                 />
               </div>
@@ -79,7 +79,7 @@ const PickupRequest = () => {
                 <input
                   type="email"
                   className="input2 text-[#464E5F] text-sm"
-                  {...register("address")}
+                  {...register("contactPerson")}
                   disabled
                 />
               </div>
@@ -106,7 +106,7 @@ const PickupRequest = () => {
                 <select
                   type="text"
                   className="input2 text-[#464E5F] text-sm"
-                  {...register("costCenter", { required: true })}
+                  {...register("shipmentType", { required: true })}
                   disabled
                 >
                   <option value="Please Select">Please Select</option>
@@ -119,7 +119,7 @@ const PickupRequest = () => {
                 <select
                   type="text"
                   className="input text-[#464E5F] text-sm"
-                  {...register("costCenter", { required: true })}
+                  {...register("pickupTime", { required: true })}
                 >
                   <option value="Please Select">Please Select</option>
                 </select>
@@ -131,7 +131,7 @@ const PickupRequest = () => {
                 <input
                   type="number"
                   className="input"
-                  {...register("customerEmail")}
+                  {...register("mobile#")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -147,7 +147,7 @@ const PickupRequest = () => {
                 <textarea
                   type="text"
                   className="input2 h-[5rem] resize-none"
-                  {...register("customerAddress")}
+                  {...register("Address")}
                 />
               </div>
             </div>

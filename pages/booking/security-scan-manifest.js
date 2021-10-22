@@ -43,7 +43,7 @@ const SecurityScan = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("pickup id", { required: true })}
+                      {...register("pickupId", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -60,7 +60,7 @@ const SecurityScan = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("coureir code #", { required: true })}
+                      {...register("coureirCode#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -76,7 +76,7 @@ const SecurityScan = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("printOption", { required: true })}
+                    {...register("shiftType", { required: true })}
                   >
                     <option value="Please Select">Select Shift</option>
                     <option value="Please Select">Morining</option>
@@ -96,7 +96,7 @@ const SecurityScan = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("vehicle #", { required: true })}
+                      {...register("vehicle#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -113,7 +113,7 @@ const SecurityScan = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("consignment #", { required: true })}
+                      {...register("consignment#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">

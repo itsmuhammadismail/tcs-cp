@@ -43,7 +43,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("pieces", { required: true })}
+                    {...register("bookingType", { required: true })}
                   >
                     <option value="Please Select">Select Type</option>
                     <option value="Please Select">Manual</option>
@@ -59,7 +59,7 @@ import {
                   <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("product")}
                 />
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
@@ -69,7 +69,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("codAmount", { required: true })}
+                    {...register("labelGenerationDate", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -99,7 +99,7 @@ import {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("staff code", { required: true })}
+                      {...register("staffCode", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -116,7 +116,7 @@ import {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("p bag", { required: true })}
+                      {...register("pBag#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -132,7 +132,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("cost center", { required: true })}
+                    {...register("costCenter", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -148,7 +148,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("services", { required: true })}
+                    {...register("account#", { required: true })}
                   >
                     <option value="Please Select">Select Account #</option>
                     <option value="Please Select">71237192739</option>
@@ -166,7 +166,7 @@ import {
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("height", { required: true })}
+                      {...register("service", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -183,7 +183,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("weight", { required: true })}
+                    {...register("cycleDate", { required: true })}
                   >
                     <option value="Normal">Please Select</option>
                   </select>
@@ -215,7 +215,7 @@ import {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("route code", { required: true })}
+                      {...register("routeCode#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -232,7 +232,7 @@ import {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("sealed", { required: true })}
+                      {...register("sealed#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">

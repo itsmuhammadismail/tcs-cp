@@ -43,7 +43,7 @@ const SecurityScanRecieving = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("Recieving Id", { required: true })}
+                      {...register("recievingId", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -60,7 +60,7 @@ const SecurityScanRecieving = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("Vehicle #", { required: true })}
+                      {...register("Vehicle#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -96,7 +96,7 @@ const SecurityScanRecieving = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("security scan id", { required: true })}
+                      {...register("securityScanId", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -113,7 +113,7 @@ const SecurityScanRecieving = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("warehouse id", { required: true })}
+                      {...register("warehouseId", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">

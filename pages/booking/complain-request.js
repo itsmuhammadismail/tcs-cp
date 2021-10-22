@@ -39,7 +39,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="name"
                   className="input2"
-                  {...register("customerName")}
+                  {...register("bookingDate")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -47,7 +47,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="number"
                   className="input2"
-                  {...register("customerNumber")}
+                  {...register("orderReference")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -55,7 +55,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="email"
                   className="input2"
-                  {...register("customerEmail")}
+                  {...register("origin")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -63,7 +63,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("consigneeName")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -71,7 +71,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("consigneeAddress")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -79,7 +79,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("pieces")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -87,7 +87,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("productDetails")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -95,7 +95,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("deliveryStatusDesc")}
                 />
               </div>
             </div>
@@ -117,7 +117,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="number"
                   className="input2"
-                  {...register("customerNumber")}
+                  {...register("costCenter")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -125,7 +125,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="email"
                   className="input2"
-                  {...register("customerEmail")}
+                  {...register("service")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -133,7 +133,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("destination")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -141,7 +141,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("consigneeContact")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -149,7 +149,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("weight")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -157,7 +157,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("codAmount")}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -165,7 +165,7 @@ const ComplainServiceReq = () => {
                 <input
                   type="text"
                   className="input2"
-                  {...register("customerPerson")}
+                  {...register("deliveryStatus")}
                 />
               </div>
             </div>

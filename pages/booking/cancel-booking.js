@@ -54,7 +54,7 @@ const CancelBooking = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("height", { required: true })}
+                      {...register("fromConsignmentNumber", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -70,7 +70,7 @@ const CancelBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("codAmount", { required: true })}
+                    {...register("costCenter", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -100,7 +100,7 @@ const CancelBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("services", { required: true })}
+                    {...register("toDate", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -113,7 +113,7 @@ const CancelBooking = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("height", { required: true })}
+                      {...register("toConsignmentNumber", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">

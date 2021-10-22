@@ -43,7 +43,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("pieces", { required: true })}
+                    {...register("employeeCode", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -55,7 +55,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("codAmount", { required: true })}
+                    {...register("shipmentType", { required: true })}
                   >
                     <option value="Please Select">All (Having All Types Of weight</option>
                      <option value="Please Select">Single copy per page</option>
@@ -70,7 +70,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("codAmount", { required: true })}
+                    {...register("labelGenerationDate", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -100,7 +100,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("services", { required: true })}
+                    {...register("employeeName", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -113,7 +113,7 @@ import {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("height", { required: true })}
+                      {...register("costCenter", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -131,7 +131,7 @@ import {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("printOption", { required: true })}
+                    {...register("origin", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                     <option value="Please Select">Single copy per page</option>
