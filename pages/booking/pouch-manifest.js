@@ -39,7 +39,7 @@ const PouchManifest = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("manifest", { required: true })}
+                      {...register("manifest#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -54,7 +54,7 @@ const PouchManifest = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("account", { required: true })}
+                      {...register("account#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -69,7 +69,7 @@ const PouchManifest = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("consignment #", { required: true })}
+                      {...register("consignment#", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -85,7 +85,7 @@ const PouchManifest = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("booking date", { required: true })}
+                    {...register("bookingDate", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>                
                      </select>
@@ -112,7 +112,7 @@ const PouchManifest = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("codAmount", { required: true })}
+                    {...register("destination", { required: true })}
                   >
                     <option value="Please Select">Select Destination</option>
                      <option value="Please Select">AFH</option>
@@ -141,7 +141,7 @@ const PouchManifest = () => {
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("courier code", { required: true })}
+                      {...register("courierCode", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -156,7 +156,7 @@ const PouchManifest = () => {
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("work order #", { required: true })}
+                      {...register("workOrder #", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -177,7 +177,7 @@ const PouchManifest = () => {
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("consignee name", { required: true })}
+                      {...register("consigneeName", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -193,7 +193,7 @@ const PouchManifest = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("booking date", { required: true })}
+                    {...register("costCenter", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>                
                      </select>
@@ -219,7 +219,7 @@ const PouchManifest = () => {
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("shipper name", { required: true })}
+                      {...register("shipperName", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -233,7 +233,7 @@ const PouchManifest = () => {
                 <input
                   type="text"
                   className="input2 h-[5rem] resize-none"
-                  {...register("customerEmail")}
+                  {...register("remarks")}
                 />
               </div>
          

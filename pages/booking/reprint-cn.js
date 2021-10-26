@@ -41,7 +41,7 @@ const RePrintCN = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("pieces", { required: true })}
+                    {...register("dateRange", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -54,7 +54,7 @@ const RePrintCN = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("height", { required: true })}
+                      {...register("cnFrom", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -70,7 +70,7 @@ const RePrintCN = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("codAmount", { required: true })}
+                    {...register("origin", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -83,7 +83,7 @@ const RePrintCN = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("weight", { required: true })}
+                    {...register("status", { required: true })}
                   >
                     <option value="Normal">Normal</option>
                     <option value="Reverse Logistics">Reverse Logistics</option>
@@ -100,7 +100,7 @@ const RePrintCN = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("services", { required: true })}
+                    {...register("costCenter", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -113,7 +113,7 @@ const RePrintCN = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("height", { required: true })}
+                      {...register("cnTo", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
