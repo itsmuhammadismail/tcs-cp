@@ -5,31 +5,31 @@ import Card from "../../components/Bookings/Card";
 import Button from "../../components/Button";
 
 import {
-    FormControl,
-    FormControlLabel,
-    Radio,
-    RadioGroup,
-  } from "@mui/material";
-  
-  import { useForm } from "react-hook-form";
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
+
+import { useForm } from "react-hook-form";
 const CancelBooking = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-      } = useForm();
-      const onSubmit = (data) => console.log(data);
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <Head>
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Head>
         <title>One Booking</title>
         <meta name="description" content="One Booking" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-      <BookingLayout />   
-      <div className="media mx-auto p-4 pt-2 flex gap-6">
+        <BookingLayout />
+        <div className="media mx-auto p-4 pt-2 flex gap-6">
           {/* Shipments start */}
           <Card heading="Cancelation Of Booking">
             <div className="flex gap-6">
@@ -48,7 +48,8 @@ const CancelBooking = () => {
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
-                 From Consignement Number<span className="text-[#FF0000]">*</span>
+                    From Consignement Number
+                    <span className="text-[#FF0000]">*</span>
                   </label>
                   <div className="flex flex-col flex-1">
                     <input
@@ -75,7 +76,7 @@ const CancelBooking = () => {
                     <option value="Please Select">Please Select</option>
                   </select>
                 </div>
-{/* 
+                {/* 
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     Cost Center <span className="text-[#FF0000]">*</span>
@@ -92,7 +93,6 @@ const CancelBooking = () => {
               </div>
               {/* Right */}
               <div className="flex-1 flex flex-col gap-3 ">
-                
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
                     To Date <span className="text-[#FF0000]">*</span>
@@ -107,7 +107,8 @@ const CancelBooking = () => {
                 </div>
                 <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label2">
-                    To Consignement Number <span className="text-[#FF0000]">*</span>
+                    To Consignement Number{" "}
+                    <span className="text-[#FF0000]">*</span>
                   </label>
                   <div className="flex flex-col flex-1">
                     <input
@@ -122,8 +123,7 @@ const CancelBooking = () => {
                     )}
                   </div>
                 </div>
-               
-              
+
                 {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
                     Cost Center <span className="text-[#FF0000]">*</span>
@@ -162,7 +162,7 @@ const CancelBooking = () => {
         </div>
       </Layout>
     </form>
-      );
-}
- 
+  );
+};
+
 export default CancelBooking;
