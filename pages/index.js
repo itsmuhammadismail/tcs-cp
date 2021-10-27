@@ -22,7 +22,7 @@ const Login = () => {
       localStorage.setItem("token", res.token);
       setCookie("token", JSON.stringify(res), {
         path: "/",
-        maxAge: 3600, // Expires after 1hr
+        maxAge: 7200, // Expires after 2hr
         sameSite: true,
       });
       router.push("/dashboard");
@@ -30,34 +30,35 @@ const Login = () => {
   };
 
   return (
-    <form className="flex flex-1 flex-col justify-center items-center">
-      <h1 className="flex mt-8 justify-center items-center text-lg">
-        Login Form
-      </h1>
-      <div className="flex-1 flex-col m-8">
-        <div className="flex items-center gap-3 m-4">
-          <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">username</label>
-            <input type="name" className="input2" ref={username} />
+    <form className="flex justify-center items-center w-full h-[100vh]">
+      <div className="flex-1 items-center flex flex-col w-full h-full">
+        <img src="/logo.svg" alt="" className="h-12 mt-12" />
+        <div className="flex-1 flex flex-col justify-center items-center mt-[-3rem]">
+          <h1 className="font-semibold text-[2rem]">Sign in</h1>
+          <div className="flex flex-col mt-2">
+            <label htmlFor="" className="font-semibold">
+              Email
+            </label>
+            <input type="text" className="input2 w-[18rem]" ref={username} />
           </div>
-        </div>
-        <div className="flex items-center gap-3 m-4">
-          <div className="flex-1 flex items-center gap-4 w-full">
-            <label className="label">password</label>
-            <input type="name" className="input2" ref={password} />
+          <div className="flex flex-col mt-2">
+            <label htmlFor="" className="font-semibold">
+              Password
+            </label>
+            <input type="text" className="input2 w-[18rem]" ref={password} />
           </div>
-        </div>
-        <div className="flex justify-center items-center my-8">
-          <Button
-            className="justify-center flex-1 flex items-center"
-            type="submit"
-            color="primary"
+          <button
             onClick={registeruser}
+            className="rounded-md h-[2.5rem] flex justify-center items-center font-semibold text-sm gap-3 bg-[#4cb050] w-[18rem] text-white mt-[1rem]"
           >
-            Submit
-          </Button>
+            Sign in
+          </button>
         </div>
       </div>
+      <div
+        className="flex-1 bg-[#fcfeff] w-full h-full"
+        style={{ backgroundImage: "url('/Visual.svg')" }}
+      ></div>
     </form>
   );
 };
