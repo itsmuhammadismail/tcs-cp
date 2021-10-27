@@ -8,6 +8,7 @@ import Layout from "../components/Layout";
 import Orders from "../components/Orders";
 import Payment from "../components/Payment";
 import Countries from "../api/countries";
+import { parseCookies } from "../helpers/";
 
 export default function Home() {
   const [dateDropdown, setDateDropdown] = useState(false);
@@ -52,3 +53,21 @@ export default function Home() {
     </div>
   );
 }
+
+Home.getInitialProps = async ({ req, res }) => {
+  const data = parseCookies(req);
+
+  if (res) {
+    if (
+      (Object.keys(data).length === 0 && data.constructor === Object) ||
+      Object(data).token === "undefined"
+    ) {
+      res.writeHead(301, { Location: "/" });
+      res.end();
+    }
+  }
+
+  return {
+    data: data && data,
+  };
+};

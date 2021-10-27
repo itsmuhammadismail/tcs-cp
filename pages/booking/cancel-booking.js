@@ -166,3 +166,21 @@ const CancelBooking = () => {
 };
 
 export default CancelBooking;
+
+CancelBooking.getInitialProps = async ({ req, res }) => {
+  const data = parseCookies(req);
+
+  if (res) {
+    if (
+      (Object.keys(data).length === 0 && data.constructor === Object) ||
+      Object(data).token === "undefined"
+    ) {
+      res.writeHead(301, { Location: "/" });
+      res.end();
+    }
+  }
+
+  return {
+    data: data && data,
+  };
+};

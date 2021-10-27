@@ -2,12 +2,19 @@ import { Drawer, Button, Radio, Space } from "antd";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import EmailIcon from "@mui/icons-material/Email";
+import { useCookies } from "react-cookie";
 
 const App = ({ visible, setVisible }) => {
   const [placement, setPlacement] = useState("right");
+  const [cookie, removeCookie] = useCookies(["token"]);
 
   const onClose = () => {
     setVisible(false);
+  };
+
+  const logout = () => {
+    removeCookie("token");
+    window.location.href = "/";
   };
 
   return (
@@ -45,7 +52,10 @@ const App = ({ visible, setVisible }) => {
                 <EmailIcon sx={{ color: "#7E8299" }} fontSize="small" />
                 <span>ismail@tcs.com.pk</span>
               </p>
-              <button className="bg-[#FFE2E5] text-[#F64E60] w-[6rem] h-[2rem] rounded-xl font-semibold mt-2">
+              <button
+                className="bg-[#FFE2E5] text-[#F64E60] w-[6rem] h-[2rem] rounded-xl font-semibold mt-2"
+                onClick={logout}
+              >
                 Sign Out
               </button>
             </div>
