@@ -16,7 +16,7 @@ const Login = () => {
     const registeruser = async(event) =>{
         event.preventDefault();
        const res = await login(username.current.value, password.current.value)
-       console.log(res)
+     
        setToken(res)
         if ("token" in res) {
             
