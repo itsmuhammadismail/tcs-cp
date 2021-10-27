@@ -3,6 +3,8 @@ import Layout from "../../components/Layout";
 import BookingLayout from "../../components/Bookings/BookingLayout";
 import Card from "../../components/Bookings/Card";
 import Button from "../../components/Button";
+import { parseCookies } from "../../helpers";
+
 
 
 import {
@@ -264,7 +266,7 @@ import {
    
   export default MMSBooking;
 
-  MmsBooking.getInitialProps = async ({ req, res }) => {
+  MMSBooking.getInitialProps = async ({ req, res }) => {
     const data = parseCookies(req);
   
     if (res) {

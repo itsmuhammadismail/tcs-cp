@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
-
+import { parseCookies } from "../../helpers";
 import BookingLayout from "../../components/Bookings/BookingLayout";
 import Card from "../../components/Bookings/Card";
 import {

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
+import { parseCookies } from "../../helpers";
 
 import BookingLayout from "../../components/Bookings/BookingLayout";
 import Card from "../../components/Bookings/Card";
@@ -151,7 +152,7 @@ const SecurityScan = () => {
 
 export default SecurityScan;
 
-SecurityScanManifest.getInitialProps = async ({ req, res }) => {
+SecurityScan.getInitialProps = async ({ req, res }) => {
   const data = parseCookies(req);
 
   if (res) {

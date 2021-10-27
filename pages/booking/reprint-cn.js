@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { parseCookies } from "../../helpers";
+
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
 import BookingLayout from "../../components/Bookings/BookingLayout";

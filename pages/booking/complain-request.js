@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
-
+import { parseCookies } from "../../helpers";
 import BookingLayout from "../../components/Bookings/BookingLayout";
 import Card from "../../components/Bookings/Card";
 import {
@@ -197,7 +197,7 @@ const ComplainServiceReq = () => {
  
 export default ComplainServiceReq;
 
-ComplainRequest.getInitialProps = async ({ req, res }) => {
+ComplainServiceReq.getInitialProps = async ({ req, res }) => {
   const data = parseCookies(req);
 
   if (res) {
