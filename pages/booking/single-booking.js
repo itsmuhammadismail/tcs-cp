@@ -13,6 +13,7 @@ import {
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import SingleBookingDropdown from "../../components/SingleBookingDropdown";
 
 const Bookings = () => {
   const {
@@ -486,3 +487,22 @@ const Bookings = () => {
   );
 };
 export default Bookings;
+
+SingleBooking.getInitialProps = async ({ req, res }) => {
+  const data = parseCookies(req);
+
+  if (res) {
+    if (
+      (Object.keys(data).length === 0 && data.constructor === Object) ||
+      Object(data).token === "undefined"
+    ) {
+      res.writeHead(301, { Location: "/" });
+      res.end();
+    }
+  }
+
+  return {
+    data: data && data,
+  };
+};
+
