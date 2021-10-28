@@ -38,6 +38,9 @@ const Login = () => {
     } else {
       setIsLoading(false);
       setIncorrect(true);
+      setTimeout(() => {
+        setIncorrect(false);
+      }, 2000);
     }
   };
 
@@ -64,11 +67,11 @@ const Login = () => {
           {/* Incorrect Username or Password */}
           {incorrect && (
             <div
-              className="flex w-[20rem] space-between self-center border-2 border-red-500 px-3 py-2 text-red-500 rounded-md mb-3"
+              className="flex w-full justify-between items-center self-center border-2 border-red-500 px-3 py-2 text-red-500 rounded-md mb-3"
               onClick={() => setIncorrect(false)}
             >
               <small>Incorrect username or password. please try again!</small>
-              <ClearIcon className="cursor-pointer" />
+              <ClearIcon fontSize="small" className="cursor-pointer" />
             </div>
           )}
           <div className="mt-4 flex flex-col gap-2">
@@ -113,7 +116,7 @@ const Login = () => {
           <div className="flex flex-row-reverse mt-[2rem] mb-[2rem]">
             <button className="bg-[#4CAF50] rounded-md h-[2.3rem] flex justify-center items-center text-white text-sm w-[10rem]">
               {isLoading ? (
-                <CircularProgress color="secondary" size="20px" />
+                <CircularProgress style={{ color: "white" }} size="20px" />
               ) : (
                 "Sign In"
               )}

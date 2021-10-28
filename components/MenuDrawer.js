@@ -17,7 +17,7 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 
 const App = ({ visible, setVisible }) => {
   const [placement, setPlacement] = useState("left");
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const onClose = () => {
     setVisible(false);
