@@ -14,3 +14,8 @@ export const costcentersState = atom({
   key: "costcentersState",
   default: [],
 });
+
+export const servicesState = atom({
+  key: "servicesState",
+  default: [],
+});
