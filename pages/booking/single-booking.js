@@ -28,9 +28,10 @@ import Costcenters from "../../api/costcenters";
 import Services from "../../api/services";
 
 const Bookings = () => {
-  const [countries, setCountries] = useRecoilState(countriesState);
+  const [countries, setCountries] = useState([]);
   const [cities, setCities] = useRecoilState(citiesState);
-  const [costcenters, setCostcenters] = useRecoilState(costcentersState);
+  // const [costcenters, setCostcenters] = useRecoilState(costcentersState);
+  const [costcenters, setCostcenters] = useState(null);
   const [services, setServices] = useRecoilState(servicesState);
 
   useEffect(async () => {
@@ -57,8 +58,8 @@ const Bookings = () => {
   };
 
   const handleCity = async (e) => {
-    const res = ""
-  }
+    const res = "";
+  };
 
   const [boxAvailability, setBoxAvailability] = useState("yes");
   // const [boxAvailability, setBoxAvailability] = useState("yes")
@@ -100,13 +101,14 @@ const Bookings = () => {
                   {...register("costCenter", { required: true })}
                   // onChange={handleCostcenter}
                 >
-                  {/* {costcenters.map((costcenter) => (
-                    <option key={costcenter.id} value={costcenter.id}>
-                      {costcenter.cost_center_code +
-                        "-" +
-                        costcenter.cost_center_name}
-                    </option>
-                  ))} */}
+                  {costcenters &&
+                    costcenters.map((costcenter) => (
+                      <option key={costcenter.id} value={costcenter.id}>
+                        {costcenter.cost_center_code +
+                          "-" +
+                          costcenter.cost_center_name}
+                      </option>
+                    ))}
                 </select>
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
