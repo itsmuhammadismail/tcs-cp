@@ -34,14 +34,12 @@ const Bookings = () => {
   const [services, setServices] = useRecoilState(servicesState);
 
   useEffect(async () => {
-    
-      const res = await Cities(1);
-      setCities(res);
-      const rescost = await Costcenters(21);
-      setCostcenters(rescost);
-      const resservice = await Services(21);
-      setServices(resservice);
-    }
+    const res = await Cities(1);
+    setCities(res);
+    const rescost = await Costcenters(21);
+    setCostcenters(rescost);
+    const resservice = await Services(21);
+    setServices(resservice);
   }, []);
   const {
     register,
