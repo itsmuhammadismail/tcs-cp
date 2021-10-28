@@ -206,6 +206,35 @@ a {
   padding: 0 !important;
 }
 
+.MuiList-root {
+  padding: 0.5rem !important;
+}
+
+.MuiList-root .MuiListItemButton-root {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.css-ishquk-MuiButtonBase-root-MuiListItemButton-root {
+  padding-left: 0.3rem !important;
+  border: none !important;
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+}
+
+.drawer-logout .MuiList-root .MuiListItemButton-root {
+  border-bottom: none;
+  border-top: 1px solid #e0e0e0;
+}
+
+.MuiListItemButton-root:hover img {
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  -webkit-filter: invert(47%) sepia(100%) saturate(5194%) hue-rotate(338deg) brightness(86%) contrast(125%);
+          filter: invert(47%) sepia(100%) saturate(5194%) hue-rotate(338deg) brightness(86%) contrast(125%);
+}
+
 .input {
   @apply focus:outline-none text-sm flex-1 p-2 rounded-md;
 }
