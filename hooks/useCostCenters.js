@@ -9,11 +9,11 @@ const useCostCenters = () => {
     if (costCenters.length === 0) {
       const lsCostCenters = localStorage.getItem("costCenters");
       if (lsCostCenters === null) {
-        const costCenter = await CostCenters();
+        const costCenter = await Costcenters();
 
         localStorage.setItem("costCenters", JSON.stringify(costCenter));
       }
-      setcostCenters(localStorage.getItem("costCenters"));
+      setCostCenters(localStorage.getItem("costCenters"));
     }
   }, []);
 };
