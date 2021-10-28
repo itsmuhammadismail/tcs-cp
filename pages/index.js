@@ -8,7 +8,6 @@ import { CircularProgress } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const Login = () => {
-
   const {
     register,
     handleSubmit,
@@ -16,9 +15,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const router = useRouter();
-  // const username = useRef();
-  // const password = useRef();
-  const [token, setToken] = useState(null);
+
   const [cookie, setCookie] = useCookies(["token"]);
   const [isLoading, setIsLoading] = useState(false);
   const [incorrect, setIncorrect] = useState(false);
@@ -27,7 +24,7 @@ const Login = () => {
     setIsLoading(true);
     const res = await login(username, password);
     console.log(res);
-    setToken(res);
+
     if ("token" in res) {
       localStorage.setItem("token", res.token);
       setCookie("token", JSON.stringify(res), {

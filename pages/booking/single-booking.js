@@ -16,48 +16,47 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import SingleBookingDropdown from "../../components/SingleBookingDropdown";
 import { useRecoilState } from "recoil";
-import {countriesState} from "../../recoil/atoms"
-import {useEffect } from "react"
-import {citiesState , costcentersState, servicesState} from "../../recoil/atoms"
+import { countriesState } from "../../recoil/atoms";
+import { useEffect } from "react";
+import {
+  citiesState,
+  costcentersState,
+  servicesState,
+} from "../../recoil/atoms";
 import Cities from "../../api/cities";
-import Costcenters from"../../api/costcenters";
+import Costcenters from "../../api/costcenters";
 import Services from "../../api/services";
 
 const Bookings = () => {
   const [countries, setCountries] = useRecoilState(countriesState);
-  const [cities, setcities] = useRecoilState(citiesState);
+  const [cities, setCities] = useRecoilState(citiesState);
   const [costcenters, setCostcenters] = useRecoilState(costcentersState);
   const [services, setServices] = useRecoilState(servicesState);
 
-  useEffect(async()=>{
-    if (countries.length === 0){
-      setCountries(JSON.parse(localStorage.getItem("countries")))
-      const res = await Cities(1)
-      setcities(res)
-      const rescost = await Costcenters(21)
-      setCostcenters(rescost)
-      const resservice = await Services(21)
-      setServices(resservice)
-      // console.log(JSON.parse(localStorage.getItem("countries")))
+  useEffect(async () => {
+    
+      const res = await Cities(1);
+      setCities(res);
+      const rescost = await Costcenters(21);
+      setCostcenters(rescost);
+      const resservice = await Services(21);
+      setServices(resservice);
     }
-  },[])
+  }, []);
   const {
     register,
     handleSubmit,
-    watch, 
+    watch,
     formState: { errors },
   } = useForm();
 
+  const handleChange = async (e) => {
+    const res = await Cities(e.target.value);
+    setCities(res);
+    console.log("hello", e.target.value);
+  };
 
-  // handleChange = (event) => {
-  //   console.log('hello')
-  // };
-  // this.handleChange = handleChange.bind(this);
-  // const [changeCity, setChangeCity] = useState('');
-
- 
-
-  const [boxAvailability, setBoxAvailability] = useState("yes")
+  const [boxAvailability, setBoxAvailability] = useState("yes");
   // const [boxAvailability, setBoxAvailability] = useState("yes")
   const onSubmit = (data) => console.log(data);
 
@@ -97,10 +96,13 @@ const Bookings = () => {
                   // onChange={this.handleChange}
                   {...register("costCenter", { required: true })}
                 >
-                  {costcenters.map(costcenter =>(
-                  <option key={costcenter.id} value={costcenter.id}>{costcenter.cost_center_code+"-"+costcenter.cost_center_name}</option>
-                  ))
-                  }
+                  {costcenters.map((costcenter) => (
+                    <option key={costcenter.id} value={costcenter.id}>
+                      {costcenter.cost_center_code +
+                        "-" +
+                        costcenter.cost_center_name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
@@ -108,7 +110,7 @@ const Bookings = () => {
                   <label className="label">Order Ref</label>
                   <input
                     type="text"
-                    className="input"
+                    className="input max-w-[10.8rem]"
                     {...register("orderRef")}
                   />
                 </div>
@@ -119,7 +121,7 @@ const Bookings = () => {
                   <div className="flex flex-col">
                     <input
                       type="text"
-                      className="input"
+                      className="input max-w-[10.8rem]"
                       {...register("contact", { required: true })}
                     />
                     {errors.contact && (
@@ -138,7 +140,7 @@ const Bookings = () => {
                   <div className="flex flex-col">
                     <input
                       type="text"
-                      className="input"
+                      className="input max-w-[10.8rem]"
                       {...register("name", { required: true })}
                     />
                     {errors.name && (
@@ -154,7 +156,7 @@ const Bookings = () => {
                   </label>
                   <select
                     type="text"
-                    className="input text-[#464E5F] text-sm"
+                    className="input text-[#464E5F] text-sm max-w-[10.8rem]"
                     {...register("deliveryType", { required: true })}
                   >
                     <option value="Normal">Normal</option>
@@ -170,29 +172,31 @@ const Bookings = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm max-w-[10.8rem]"
-                    // onChange={this.handleChange}
                     {...register("country", { required: true })}
+                    onChange={handleChange}
                   >
-                    {countries.map((country)=>(
-                      <option key={country.id} value={country.id}>{country.country_name}</option>
-                      
-                    ))}
-                    
+                    {countries &&
+                      countries.map((country) => (
+                        <option key={country.id} value={country.id}>
+                          {country.country_name}
+                        </option>
+                      ))}
                   </select>
                 </div>
-                <div className="flex-1 flex items-center gap-4 w-full">
+                <div className="flex-1 flex items-center gap-4 w-full ">
                   <label className="label">
                     City <span className="text-[#FF0000]">*</span>
                   </label>
                   <select
                     type="text"
-                    className="input text-[#464E5F] text-sm"
+                    className="input text-[#464E5F] text-sm max-w-[10.8rem]"
                     {...register("city", { required: true })}
                   >
-                    {cities.map((city) =>(
-                  <option key={city.id} value={city.id}>{city.city_name}</option>
-
-                    ) )}
+                    {cities.map((city) => (
+                      <option key={city.id} value={city.id}>
+                        {city.city_name}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -203,7 +207,8 @@ const Bookings = () => {
                   </label>
                   <select
                     type="text"
-                    className="input text-[#464E5F] text-sm"
+                    disabled
+                    className="input text-[#464E5F] text-sm max-w-[10.8rem]"
                     {...register("exprCenter", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
@@ -216,7 +221,7 @@ const Bookings = () => {
                   <div className="flex flex-col">
                     <input
                       type="email"
-                      className="input"
+                      className="input max-w-[10.8rem]"
                       {...register("email", { required: true })}
                     />
                     {errors.email && (
@@ -228,22 +233,22 @@ const Bookings = () => {
                 </div>
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
-                  <label className="label">
-                    Address<span className="text-[#FF0000]">*</span>
-                  </label>
-                  <div className="flex flex-col flex-1">
-                    <input
-                      type="text"
-                      className="input flex-1"
-                      {...register("address", { required: true })}
-                    />
-                    {errors.shipmentDetails && (
-                      <span className="requiredField">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
+                <label className="label">
+                  Address<span className="text-[#FF0000]">*</span>
+                </label>
+                <div className="flex flex-col flex-1">
+                  <input
+                    type="text"
+                    className="input flex-1"
+                    {...register("address", { required: true })}
+                  />
+                  {errors.shipmentDetails && (
+                    <span className="requiredField">
+                      This field is required
+                    </span>
+                  )}
                 </div>
+              </div>
             </div>
           </Card>
           {/* Consignee End */}
@@ -323,13 +328,11 @@ const Bookings = () => {
                   <label className="label">
                     COD Amount (PKR) <span className="text-[#FF0000]">*</span>
                   </label>
-                  <select
+                  <input
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("codAmount", { required: true })}
-                  >
-                    <option value="Please Select">Please Select</option>
-                  </select>
+                  />
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -359,13 +362,11 @@ const Bookings = () => {
                   <label className="label">
                     Weight (KG) <span className="text-[#FF0000]">*</span>
                   </label>
-                  <select
+                  <input
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("weight", { required: true })}
-                  >
-                    <option value="Please Select">Please Select</option>
-                  </select>
+                  />
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -448,9 +449,11 @@ const Bookings = () => {
                     className="input text-[#464E5F] text-sm"
                     {...register("services", { required: true })}
                   >
-                    {services.map((service) =>(
-                  <option key={service.id} value={service.id}>{service.service_code}{service.service_name}</option>
-
+                    {services.map((service) => (
+                      <option key={service.id} value={service.id}>
+                        {service.service_code}
+                        {service.service_name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -516,7 +519,9 @@ const Bookings = () => {
                     {...register("printOption", { required: true })}
                   >
                     <option value="3 copies per page">3 copies per page</option>
-                    <option value="Single copy per page">Single copy per page</option>
+                    <option value="Single copy per page">
+                      Single copy per page
+                    </option>
                     <option value="6x4 label">6x4 label</option>
                     <option value="3 labels per page">3 labels per page</option>
                   </select>
@@ -566,4 +571,3 @@ Bookings.getInitialProps = async ({ req, res }) => {
     data: data && data,
   };
 };
-
