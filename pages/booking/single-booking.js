@@ -60,6 +60,7 @@ const Bookings = () => {
     contactNumber.current.value = rescost[0].phone_number;
     customerEmail.current.value = rescost[0].email;
     customerAddress.current.value = rescost[0].pickup_address;
+    
     const resservice = await Services(21);
     setServices(resservice);
     const resExp = await ExpressCenter(res[0].city_code);

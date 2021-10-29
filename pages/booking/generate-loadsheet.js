@@ -5,37 +5,56 @@ import Card from "../../components/Bookings/Card";
 import Button from "../../components/Button";
 import { parseCookies } from "../../helpers";
 
-
+import { LoadsheetState } from "../../recoil/atoms";
+import { useEffect, useRef, useState } from "react";
+import loadsheet from "../../api/loadsheet";
+import Costcenters from "../../api/costcenters";
+import { costcentersState } from "../../recoil/atoms";
+import Cities from "../../api/cities";
+import { citiesState } from "../../recoil/atoms";
 
 import {
-    FormControl,
-    FormControlLabel,
-    Radio,
-    RadioGroup,
-  } from "@mui/material";
-  
-  import { useForm } from "react-hook-form";
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
-  const GloadSheet = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-      } = useForm();
-      const onSubmit = (data) => console.log(data);
-      return (  
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <Head>
+import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+
+const GloadSheet = () => {
+  const [costcenters, setCostcenters] = useState([]);
+  const [cities, setCities] = useRecoilState(citiesState);
+
+  useEffect(async () => {
+    const rescost = await Costcenters();
+    const res = await Cities(1);
+    setCities(res);
+
+    setCostcenters(rescost);
+  }, []);
+
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Head>
         <title>One Booking</title>
         <meta name="description" content="One Booking" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-      <BookingLayout />   
-      <div className="media mx-auto p-4 pt-2 flex gap-6">
+        <BookingLayout />
+        <div className="media mx-auto p-4 pt-2 flex gap-6">
           {/* Shipments start */}
-          <Card heading="Cancelation Of Booking">
+          <Card heading="Generate LoadSheet for Today">
             <div className="flex gap-6">
               <div className="flex-1 flex flex-col gap-3 ">
                 <div className="flex-1 flex items-center gap-4 w-full">
@@ -52,22 +71,25 @@ import {
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
-                   Shipment Type <span className="text-[#FF0000]">*</span>
+                    Shipment Type <span className="text-[#FF0000]">*</span>
                   </label>
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("shipmentType", { required: true })}
                   >
-                    <option value="Please Select">All (Having All Types Of weight</option>
-                     <option value="Please Select">Single copy per page</option>
+                    <option value="Please Select">
+                      All (Having All Types Of weight
+                    </option>
+                    <option value="Please Select">Single copy per page</option>
                     <option value="Please Select">6x4 labels</option>
-                    <option value="Please Select">3 labels per page</option>                 
-                     </select>
+                    <option value="Please Select">3 labels per page</option>
+                  </select>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
-                   Label Generation Date <span className="text-[#FF0000]">*</span>
+                    Label Generation Date{" "}
+                    <span className="text-[#FF0000]">*</span>
                   </label>
                   <select
                     type="text"
@@ -77,7 +99,7 @@ import {
                     <option value="Please Select">Please Select</option>
                   </select>
                 </div>
-{/* 
+                {/* 
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     Cost Center <span className="text-[#FF0000]">*</span>
@@ -94,7 +116,6 @@ import {
               </div>
               {/* Right */}
               <div className="flex-1 flex flex-col gap-3 ">
-                
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
                     Employee Name <span className="text-[#FF0000]">*</span>
@@ -109,23 +130,25 @@ import {
                 </div>
                 <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label2">
-                  Cost Center <span className="text-[#FF0000]">*</span>
+                    Cost Center <span className="text-[#FF0000]">*</span>
                   </label>
-                  <div className="flex flex-col flex-1">
-                    <input
-                      type="number"
-                      className="input text-[#464E5F] text-sm flex-1"
-                      {...register("costCenter", { required: true })}
-                    ></input>
-                    {errors.height && (
-                      <span className="requiredField">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
+                  <select
+                    type="text"
+                    className="input text-[#464E5F] text-sm"
+                    {...register("costcenters")}
+                  >
+                    {costcenters &&
+                      costcenters.map((costcenter) => (
+                        <option key={costcenter.id} value={costcenter.id}>
+                          {costcenter.cost_center_code +
+                            "-" +
+                            costcenter.cost_center_name}
+                        </option>
+                      ))}
+                  
+                  </select>
                 </div>
-               
-              
+
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
                     Origin <span className="text-[#FF0000]">*</span>
@@ -135,10 +158,9 @@ import {
                     className="input text-[#464E5F] text-sm"
                     {...register("origin", { required: true })}
                   >
-                    <option value="Please Select">Please Select</option>
-                    <option value="Please Select">Single copy per page</option>
-                    <option value="Please Select">6x4 labels</option>
-                    <option value="Please Select">3 labels per page</option>
+                    {cities.map((city) =>(
+                  <option key={city.id} value={city.city_code}>{city.city_name}</option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -157,28 +179,25 @@ import {
         </div>
       </Layout>
     </form>
+  );
+};
 
+export default GloadSheet;
 
-      );
-  }
-   
-  export default GloadSheet;
+GloadSheet.getInitialProps = async ({ req, res }) => {
+  const data = parseCookies(req);
 
-  GloadSheet.getInitialProps = async ({ req, res }) => {
-    const data = parseCookies(req);
-  
-    if (res) {
-      if (
-        (Object.keys(data).length === 0 && data.constructor === Object) ||
-        Object(data).token === "undefined"
-      ) {
-        res.writeHead(301, { Location: "/" });
-        res.end();
-      }
+  if (res) {
+    if (
+      (Object.keys(data).length === 0 && data.constructor === Object) ||
+      Object(data).token === "undefined"
+    ) {
+      res.writeHead(301, { Location: "/" });
+      res.end();
     }
-  
-    return {
-      data: data && data,
-    };
+  }
+
+  return {
+    data: data && data,
   };
-  
+};
