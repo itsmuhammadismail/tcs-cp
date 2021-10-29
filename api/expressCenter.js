@@ -8,7 +8,7 @@ const ExpressCenter = async (city) => {
     method: "POST",
     redirect: "follow",
     headers: header,
-    body: JSON.stringify({ city_code: "KHI" }),
+    body: JSON.stringify({ city_code: city }),
   };
 
   const result = await fetch(
