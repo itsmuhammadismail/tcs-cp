@@ -27,6 +27,7 @@ import Cities from "../../api/cities";
 import Costcenters from "../../api/costcenters";
 import Services from "../../api/services";
 import ExpressCenter from "../../api/expressCenter";
+import Booking from "../../api/booking";
 
 const Bookings = () => {
   const [countries, setCountries] = useState([]);
@@ -43,9 +44,24 @@ const Bookings = () => {
   const customerName = useRef();
   const contactNumber = useRef();
   const customerEmail = useRef();
+  const contactPerson = useRef();
   const customerAddress = useRef();
 
+  const countryRef = useRef();
+  const cityRef = useRef();
+
+  const expCenterRef = useRef();
   const origin = useRef();
+  const servicesRef = useRef();
+
+  const zipcode = useRef();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   useEffect(async () => {
     let cont = [];
@@ -74,9 +90,7 @@ const Bookings = () => {
     for (let country of cont) {
       let theCities = await Cities(originCountry);
       if (country.id == originCountry) {
-        console.log(theCities);
         for (let city of theCities) {
-          console.log(city.id, originCity);
           if (city.id == originCity) {
             origin.current.value = city.city_name;
           }
@@ -84,12 +98,6 @@ const Bookings = () => {
       }
     }
   }, []);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
 
   const handleCountry = async (e) => {
     const res = await Cities(e.target.value);
@@ -104,7 +112,6 @@ const Bookings = () => {
     if (res["items"] !== undefined && res["items"][0] !== undefined)
       consigneeAddress.current.value = res["items"][0].address;
     else consigneeAddress.current.value = "";
-    console.log(res["items"][0]);
   };
 
   const handleExpress = async (e) => {
@@ -124,8 +131,63 @@ const Bookings = () => {
   };
 
   const [boxAvailability, setBoxAvailability] = useState("yes");
+  const [fragile, setFragile] = useState("yes");
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const fk_cost_center = +data.costCenter;
+    const consignee_name = data.name;
+    const consignee_address = consigneeAddress.current.value;
+    const consignee_contact = data.contact;
+    const consignee_email = data.email;
+    const pieces = +data.pieces;
+    const weight = +data.weight;
+    const is_box = boxAvailability === "yes" ? true : false;
+    const height = +data.height;
+    const width = +data.width;
+    const length = +data.length;
+    const fk_service = +servicesRef.current.value;
+    const origin_country = "PK";
+    const origin_city = origin.current.value;
+    const destination_city = cityRef.current.value;
+    const destination_country = countryRef.current.value;
+    const remarks = data.remarks;
+    const is_fragile = fragile === "yes" ? true : false;
+    const is_insurance = data.insurance !== "" ? true : false;
+    const insurance_value = data.insurance;
+    const product_detail = data.shipmentDetails;
+    const cod_amount = +data.codAmount;
+    const product_refrence = data.orderRef;
+    const delivery_type = data.deliveryType;
+    const zip_code = zipcode.current.value;
+    const res = await Booking(
+      fk_cost_center,
+      consignee_name,
+      consignee_address,
+      consignee_contact,
+      consignee_email,
+      pieces,
+      weight,
+      is_box,
+      height,
+      width,
+      length,
+      fk_service,
+      origin_country,
+      origin_city,
+      destination_city,
+      destination_country,
+      remarks,
+      is_fragile,
+      is_insurance,
+      insurance_value,
+      product_detail,
+      cod_amount,
+      product_refrence,
+      delivery_type,
+      zip_code
+    );
+    console.log(res);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -160,7 +222,7 @@ const Bookings = () => {
                 <select
                   type="text"
                   className="input text-[#464E5F] text-sm"
-                  {...register("costCenter", { required: true })}
+                  {...register("costCenter")}
                   onChange={handleCostcenter}
                 >
                   {costcenters &&
@@ -225,7 +287,7 @@ const Bookings = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm max-w-[10.8rem]"
-                    {...register("deliveryType", { required: true })}
+                    {...register("deliveryType")}
                     onChange={(e) => {
                       e.target.value === "My Collect"
                         ? setShowExpCenter(false)
@@ -245,8 +307,9 @@ const Bookings = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm max-w-[10.8rem]"
-                    {...register("country", { required: true })}
+                    {...register("country")}
                     onChange={handleCountry}
+                    ref={countryRef}
                   >
                     {countries.map((country) => (
                       <option key={country.id} value={country.id}>
@@ -262,8 +325,9 @@ const Bookings = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm max-w-[10.8rem]"
-                    {...register("city", { required: true })}
+                    {...register("city")}
                     onChange={handleCity}
+                    ref={cityRef}
                   >
                     {cities.map((city) => (
                       <option key={city.id} value={city.city_code}>
@@ -274,28 +338,53 @@ const Bookings = () => {
                 </div>
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">
-                <div className="flex-1 flex items-center gap-4 w-full">
-                  <label className="label">
-                    Expr Center <span className="text-[#FF0000]">*</span>
-                  </label>
-                  <select
-                    type="text"
-                    disabled={showExpCenter}
-                    className="input text-[#464E5F] text-sm max-w-[10.8rem]"
-                    {...register("exprCenter", { required: true })}
-                    onChange={handleExpress}
-                  >
-                    {expressCenter &&
-                      expressCenter.map((express) => (
-                        <option
-                          key={express.route_code}
-                          value={express.exp_name}
-                        >
-                          {express.exp_name}
-                        </option>
-                      ))}
-                  </select>
-                </div>
+                {showZip ? (
+                  <div className="flex-1 flex items-center gap-4 w-full">
+                    <div className="flex-1 flex items-center gap-4 w-full">
+                      <label className="label">
+                        Zip Code <span className="text-[#FF0000]">*</span>
+                      </label>
+                      <div className="flex flex-1 flex-col">
+                        <input
+                          type="text"
+                          className="input "
+                          {...register("zipcode")}
+                          ref={zipcode}
+                        />
+                        {errors.zipcode && (
+                          <span className="requiredField">
+                            This field is required
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex-1 flex items-center gap-4 w-full">
+                    <label className="label">
+                      Expr Center <span className="text-[#FF0000]">*</span>
+                    </label>
+                    <select
+                      type="text"
+                      disabled={showExpCenter}
+                      className="input text-[#464E5F] text-sm max-w-[10.8rem]"
+                      {...register("exprCenter")}
+                      onChange={handleExpress}
+                      ref={expressCenter}
+                    >
+                      {expressCenter &&
+                        expressCenter.map((express) => (
+                          <option
+                            key={express.route_code}
+                            value={express.exp_name}
+                          >
+                            {express.exp_name}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                )}
+
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     Email <span className="text-[#FF0000]">*</span>
@@ -323,7 +412,7 @@ const Bookings = () => {
                   <textarea
                     type="text"
                     className="input2 flex-1"
-                    {...register("address", { required: true })}
+                    {...register("address")}
                     ref={consigneeAddress}
                     disabled
                   />
@@ -334,27 +423,6 @@ const Bookings = () => {
                   )}
                 </div>
               </div>
-              {showZip && (
-                <div className="flex-1 flex items-center gap-4 w-full">
-                  <div className="flex-1 flex items-center gap-4 w-full">
-                    <label className="label">
-                      Zip Code <span className="text-[#FF0000]">*</span>
-                    </label>
-                    <div className="flex flex-1 flex-col">
-                      <input
-                        type="text"
-                        className="input "
-                        {...register("zipcode", { required: true })}
-                      />
-                      {errors.zipcode && (
-                        <span className="requiredField">
-                          This field is required
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </Card>
           {/* Consignee End */}
@@ -426,7 +494,7 @@ const Bookings = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("pieces", { required: true })}
+                    {...register("pieces")}
                   >
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -458,7 +526,9 @@ const Bookings = () => {
                       aria-label="box"
                       defaultValue="yes"
                       name="radio-buttons-group"
-                      {...register("boxAvailability")}
+                      value={boxAvailability}
+                      onChange={(e) => setBoxAvailability(e.target.value)}
+                      // {...register("boxAvailability")}
                     >
                       <FormControlLabel
                         value="yes"
@@ -492,7 +562,9 @@ const Bookings = () => {
                       aria-label="box"
                       defaultValue="yes"
                       name="radio-buttons-group"
-                      {...register("fragile", { required: true })}
+                      value={fragile}
+                      onChange={(e) => setFragile(e.target.value)}
+                      // {...register("fragile", { required: true })}
                     >
                       <FormControlLabel
                         value="yes"
@@ -550,7 +622,7 @@ const Bookings = () => {
                   <input
                     type="text"
                     className="input2 text-[#464E5F] text-sm"
-                    {...register("origin", { required: true })}
+                    {...register("origin")}
                     ref={origin}
                     disabled
                   />
@@ -562,7 +634,8 @@ const Bookings = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("services", { required: true })}
+                    {...register("services")}
+                    ref={servicesRef}
                   >
                     {services.map((service) => (
                       <option key={service.id} value={service.id}>
@@ -631,7 +704,7 @@ const Bookings = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("printOption", { required: true })}
+                    {...register("printOption")}
                   >
                     <option value="3 copies per page">3 copies per page</option>
                     <option value="Single copy per page">
