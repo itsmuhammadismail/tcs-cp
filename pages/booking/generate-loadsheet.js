@@ -5,13 +5,14 @@ import Card from "../../components/Bookings/Card";
 import Button from "../../components/Button";
 import { parseCookies } from "../../helpers";
 
-import { LoadsheetState } from "../../recoil/atoms";
+import { loadsheetdateState, LoadsheetState } from "../../recoil/atoms";
 import { useEffect, useRef, useState } from "react";
 import loadsheet from "../../api/loadsheet";
 import Costcenters from "../../api/costcenters";
 import { costcentersState } from "../../recoil/atoms";
 import Cities from "../../api/cities";
 import { citiesState } from "../../recoil/atoms";
+import Loadsheetdate from "../../api/loadsheetdate";
 
 import {
   FormControl,
@@ -26,13 +27,17 @@ import { useRecoilState } from "recoil";
 const GloadSheet = () => {
   const [costcenters, setCostcenters] = useState([]);
   const [cities, setCities] = useRecoilState(citiesState);
+  const [loadsheetdates, setLoadsheetdate] = useRecoilState(loadsheetdateState);
+
 
   useEffect(async () => {
     const rescost = await Costcenters();
     const res = await Cities(1);
+    const resdate = await Loadsheetdate(0);
+    setLoadsheetdate(resdate);
     setCities(res);
-
     setCostcenters(rescost);
+
   }, []);
 
 
@@ -53,7 +58,7 @@ const GloadSheet = () => {
       <Layout>
         <BookingLayout />
         <div className="media mx-auto p-4 pt-2 flex gap-6">
-          {/* Shipments start */}
+          {/* Loadsheet start */}
           <Card heading="Generate LoadSheet for Today">
             <div className="flex gap-6">
               <div className="flex-1 flex flex-col gap-3 ">
@@ -61,13 +66,12 @@ const GloadSheet = () => {
                   <label className="label">
                     Employee Code <span className="text-[#FF0000]">*</span>
                   </label>
-                  <select
+                  <input
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("employeeCode", { required: true })}
                   >
-                    <option value="Please Select">Please Select</option>
-                  </select>
+                  </input>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -96,7 +100,10 @@ const GloadSheet = () => {
                     className="input text-[#464E5F] text-sm"
                     {...register("labelGenerationDate", { required: true })}
                   >
-                    <option value="Please Select">Please Select</option>
+                    {
+                      loadsheetdates.map((loadsheetdate) => (
+                        <option key={loadsheetdate.booking_date} value={loadsheetdate.booking_date}>{loadsheetdate.booking_date}</option>
+                      ))}
                   </select>
                 </div>
                 {/* 
@@ -120,13 +127,12 @@ const GloadSheet = () => {
                   <label className="label2">
                     Employee Name <span className="text-[#FF0000]">*</span>
                   </label>
-                  <select
+                  <input
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("employeeName", { required: true })}
                   >
-                    <option value="Please Select">Please Select</option>
-                  </select>
+                  </input>
                 </div>
                 <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label2">
@@ -177,6 +183,15 @@ const GloadSheet = () => {
             type="submit"
           ></Button>
         </div>
+        <div className="media mx-auto p-4 pt-2 flex gap-6">
+          {/* Loadsheet start */}
+          <Card heading="Load Sheet Data">
+            <div className="flex gap-6">
+              <div className="flex-1 flex flex-col gap-3 ">
+                </div>
+                </div>
+                </Card>
+                </div>
       </Layout>
     </form>
   );
