@@ -51,6 +51,11 @@ const GloadSheet = () => {
     setCostcenters(rescost);
   }, []);
 
+  const handleCostcenter = async (e) => {
+    const resdate = await Loadsheetdate(e.target.value);
+    setLoadsheetdate(resdate);
+  };
+
   const {
     register,
     handleSubmit,
@@ -108,6 +113,8 @@ const GloadSheet = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("labelGenerationDate", { required: true })}
+                    onChange={handleCostcenter}
+
                   >
                     {loadsheetdates.map((loadsheetdate) => (
                       <option
