@@ -30,6 +30,17 @@ const GloadSheet = () => {
   const [loadsheetdates, setLoadsheetdate] = useRecoilState(loadsheetdateState);
 
   const [fkcity, setFkcity] = useState("");
+  const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    console.log("Selected change");
+    // cities.map((city) => fkcity === city.id && setSelected(city.city_code));
+    cities.map((city) => {
+      if (+fkcity === +city.id) setSelected(city.city_code);
+    });
+  }, [fkcity]);
+
+  useEffect(() => console.log("selected", selected), [selected]);
 
   useEffect(async () => {
     const rescost = await Costcenters();
@@ -38,9 +49,7 @@ const GloadSheet = () => {
     setLoadsheetdate(resdate);
     setCities(res);
     setCostcenters(rescost);
-
   }, []);
-
 
   const {
     register,
@@ -71,8 +80,7 @@ const GloadSheet = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("employeeCode", { required: true })}
-                  >
-                  </input>
+                  ></input>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -101,10 +109,14 @@ const GloadSheet = () => {
                     className="input text-[#464E5F] text-sm"
                     {...register("labelGenerationDate", { required: true })}
                   >
-                    {
-                      loadsheetdates.map((loadsheetdate) => (
-                        <option key={loadsheetdate.booking_date} value={loadsheetdate.booking_date}>{loadsheetdate.booking_date}</option>
-                      ))}
+                    {loadsheetdates.map((loadsheetdate) => (
+                      <option
+                        key={loadsheetdate.booking_date}
+                        value={loadsheetdate.booking_date}
+                      >
+                        {loadsheetdate.booking_date}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 {/* 
@@ -132,8 +144,7 @@ const GloadSheet = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("employeeName", { required: true })}
-                  >
-                  </input>
+                  ></input>
                 </div>
                 <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label2">
@@ -143,8 +154,7 @@ const GloadSheet = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("costcenters")}
-                    onChange = {(e) => setFkcity(e.target.value)}
-                    
+                    onChange={(e) => setFkcity(e.target.value)}
                   >
                     {costcenters &&
                       costcenters.map((costcenter) => (
@@ -154,7 +164,6 @@ const GloadSheet = () => {
                             costcenter.cost_center_name}
                         </option>
                       ))}
-                  
                   </select>
                 </div>
 
@@ -166,9 +175,13 @@ const GloadSheet = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("origin", { required: true })}
+                    value={selected}
+                    disabled
                   >
-                    {cities.map((city) =>(
-                  <option selected = {fkcity === city.id ? true : false} key={city.id} value={city.city_code}>{city.city_name}</option>
+                    {cities.map((city) => (
+                      <option key={city.id} value={city.city_code}>
+                        {city.city_name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -190,11 +203,10 @@ const GloadSheet = () => {
           {/* Loadsheet start */}
           <Card heading="Load Sheet Data">
             <div className="flex gap-6">
-              <div className="flex-1 flex flex-col gap-3 ">
-                </div>
-                </div>
-                </Card>
-                </div>
+              <div className="flex-1 flex flex-col gap-3 "></div>
+            </div>
+          </Card>
+        </div>
       </Layout>
     </form>
   );
