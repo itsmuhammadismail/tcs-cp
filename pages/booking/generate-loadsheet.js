@@ -29,6 +29,7 @@ const GloadSheet = () => {
   const [cities, setCities] = useRecoilState(citiesState);
   const [loadsheetdates, setLoadsheetdate] = useRecoilState(loadsheetdateState);
 
+  const [fkcity, setFkcity] = useState("");
 
   useEffect(async () => {
     const rescost = await Costcenters();
@@ -142,10 +143,12 @@ const GloadSheet = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("costcenters")}
+                    onChange = {(e) => setFkcity(e.target.value)}
+                    
                   >
                     {costcenters &&
                       costcenters.map((costcenter) => (
-                        <option key={costcenter.id} value={costcenter.id}>
+                        <option key={costcenter.id} value={costcenter.fk_city}>
                           {costcenter.cost_center_code +
                             "-" +
                             costcenter.cost_center_name}
@@ -165,7 +168,7 @@ const GloadSheet = () => {
                     {...register("origin", { required: true })}
                   >
                     {cities.map((city) =>(
-                  <option key={city.id} value={city.city_code}>{city.city_name}</option>
+                  <option selected = {fkcity === city.id ? true : false} key={city.id} value={city.city_code}>{city.city_name}</option>
                     ))}
                   </select>
                 </div>
