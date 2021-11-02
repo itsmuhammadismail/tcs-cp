@@ -25,36 +25,38 @@ const BookingLayout = () => {
         break;
       case "/booking/cancel-booking":
         setName("Cancel Booking");
-        break;  
+        break;
       case "/booking/generate-loadsheet":
         setName("Generate Loadsheet");
         break;
       case "/booking/complain-request":
-          setName("Complain/Service Request");
+        setName("Complain/Service Request");
+        break;
+      case "/booking/create-event":
+        setName("Create Events");
         break;
       case "/booking/international-booking":
-            setName("International Booking");
+        setName("International Booking");
         break;
 
       case "/booking/mms-booking":
-          setName("MMS Booking");
-        break;  
+        setName("MMS Booking");
+        break;
       case "/booking/pouch-manifest":
         setName("Pouch Manifest");
-        break; 
+        break;
 
       case "/booking/security-scan-manifest":
         setName("Security Scan Manifest");
-      break;   
+        break;
 
       case "/booking/security-scan-forwarding":
         setName("Security Scan Forwarding");
-      break;
-      
+        break;
+
       case "/booking/security-scan-recieving":
         setName("Security Scan Recieving");
-      break;
-          
+        break;
     }
   }, [pathname]);
 
