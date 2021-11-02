@@ -35,28 +35,15 @@ const CreateEvent = () => {
           <Card heading="Create Event">
             <div className="flex gap-6">
               <div className="flex-1 flex flex-col gap-3 ">
-                <div className="flex-1 flex items-center gap-4 w-full">
+                <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label">
-                    From Date <span className="text-[#FF0000]">*</span>
-                  </label>
-                  <select
-                    type="text"
-                    className="input text-[#464E5F] text-sm"
-                    {...register("fromDate", { required: true })}
-                  >
-                    <option value="Please Select">Please Select</option>
-                  </select>
-                </div>
-                <div className="flex-1 flex items-center gap-4 w-full">
-                  <label className="label">
-                    From Consignement Number
-                    <span className="text-[#FF0000]">*</span>
+                    Event Name <span className="text-[#FF0000]">*</span>
                   </label>
                   <div className="flex flex-col flex-1">
                     <input
-                      type="number"
+                      type="text"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("fromConsignmentNumber", { required: true })}
+                      {...register("toConsignmentNumber", { required: true })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -66,16 +53,18 @@ const CreateEvent = () => {
                   </div>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
-                  <label className="label">
-                    Cost Center <span className="text-[#FF0000]">*</span>
-                  </label>
-                  <select
-                    type="text"
-                    className="input text-[#464E5F] text-sm"
-                    {...register("costCenter", { required: true })}
-                  >
-                    <option value="Please Select">Please Select</option>
-                  </select>
+                  <div className="flex-1 flex items-center gap-4 w-full">
+                    <label className="label">
+                      Account # <span className="text-[#FF0000]">*</span>
+                    </label>
+                    <select
+                      type="text"
+                      className="input text-[#464E5F] text-sm"
+                      {...register("account#", { required: true })}
+                    >
+                      <option value="Please Select">Please Select</option>
+                    </select>
+                  </div>
                 </div>
                 {/* 
                   <div className="flex-1 flex items-center gap-4 w-full">
@@ -96,7 +85,7 @@ const CreateEvent = () => {
               <div className="flex-1 flex flex-col gap-3 ">
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
-                    To Date <span className="text-[#FF0000]">*</span>
+                    Event Date <span className="text-[#FF0000]">*</span>
                   </label>
                   <select
                     type="text"
@@ -108,12 +97,12 @@ const CreateEvent = () => {
                 </div>
                 <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label2">
-                    To Consignement Number{" "}
+                    Is Active{" "}
                     <span className="text-[#FF0000]">*</span>
                   </label>
                   <div className="flex flex-col flex-1">
                     <input
-                      type="number"
+                      type="checkbox"
                       className="input text-[#464E5F] text-sm flex-1"
                       {...register("toConsignmentNumber", { required: true })}
                     ></input>
@@ -142,23 +131,41 @@ const CreateEvent = () => {
                   </div> */}
               </div>
             </div>
+            <div className="flex-1 flex items-center gap-4 w-full mt-4">
+                <label className="label">
+                  Description <span className="text-[#FF0000]">*</span>
+                </label>
+                <div className="flex flex-col flex-1">
+                  <textarea
+                    type="text"
+                    className="input flex-1"
+                    {...register("description")}
+                    
+                  />
+                  {errors.shipmentDetails && (
+                    <span className="requiredField">
+                      This field is required
+                    </span>
+                  )}
+                </div>
+              </div>
           </Card>
           {/* Shipments End */}
         </div>
         <div className="media mx-auto p-4 flex justify-center items-center gap-2">
           <Button
-            text="Submit"
+            text="Create"
             bgColor="#4CAF50"
             color="white"
             width="11rem"
-            type="submit"
+            type="Create"
           ></Button>
           <Button
-            text="Cancel CN(s)"
+            text="Cancel"
             bgColor="#4CAF50"
             color="white"
             width="11rem"
-            type="submit"
+            type="Cancel"
           ></Button>
         </div>
       </Layout>
