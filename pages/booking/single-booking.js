@@ -32,6 +32,7 @@ import Booking from "../../api/booking";
 const Bookings = () => {
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useRecoilState(citiesState);
+  const [pkCities, setPkCities] = useState([]);
   // const [costcenters, setCostcenters] = useRecoilState(costcentersState);
   const [costcenters, setCostcenters] = useState(null);
   const [expressCenter, setExpressCenter] = useState(null);
@@ -46,6 +47,8 @@ const Bookings = () => {
   const customerEmail = useRef();
   const contactPerson = useRef();
   const customerAddress = useRef();
+
+  const costcenterRef = useRef();
 
   const countryRef = useRef();
   const cityRef = useRef();
@@ -71,12 +74,13 @@ const Bookings = () => {
     }
     const res = await Cities(1);
     setCities(res);
+    setPkCities(res);
     const rescost = await Costcenters();
     setCostcenters(rescost);
     contactNumber.current.value = rescost[0].phone_number;
     customerEmail.current.value = rescost[0].email;
     customerAddress.current.value = rescost[0].pickup_address;
-    
+
     const resservice = await Services(21);
     setServices(resservice);
     const resExp = await ExpressCenter(res[0].city_code);
@@ -93,7 +97,7 @@ const Bookings = () => {
       if (country.id == originCountry) {
         for (let city of theCities) {
           if (city.id == originCity) {
-            origin.current.value = city.city_name;
+            origin.current.value = city.city_code;
           }
         }
       }
@@ -135,7 +139,7 @@ const Bookings = () => {
   const [fragile, setFragile] = useState("yes");
 
   const onSubmit = async (data) => {
-    const fk_cost_center = +data.costCenter;
+    const fk_cost_center = +costcenterRef.current.value;
     const consignee_name = data.name;
     const consignee_address = consigneeAddress.current.value;
     const consignee_contact = data.contact;
@@ -150,7 +154,15 @@ const Bookings = () => {
     const origin_country = "PK";
     const origin_city = origin.current.value;
     const destination_city = cityRef.current.value;
-    const destination_country = countryRef.current.value;
+    const destination_country_id = countryRef.current.value;
+    const destination_country_list = countries.filter((country) => {
+      if (+destination_country_id === country.id) return country;
+    });
+    console.log(
+      "Destination Country list ",
+      destination_country_list[0].country_code
+    );
+    const destination_country = destination_country_list[0].country_code;
     const remarks = data.remarks;
     const is_fragile = fragile === "yes" ? true : false;
     const is_insurance = data.insurance !== "" ? true : false;
@@ -159,7 +171,8 @@ const Bookings = () => {
     const cod_amount = +data.codAmount;
     const product_refrence = data.orderRef;
     const delivery_type = data.deliveryType;
-    const zip_code = zipcode.current.value;
+    let zip_code = "";
+    if (showZip) zip_code = zipcode.current.value;
     const res = await Booking(
       fk_cost_center,
       consignee_name,
@@ -225,6 +238,7 @@ const Bookings = () => {
                   className="input text-[#464E5F] text-sm"
                   {...register("costCenter")}
                   onChange={handleCostcenter}
+                  ref={costcenterRef}
                 >
                   {costcenters &&
                     costcenters.map((costcenter) => (
@@ -330,11 +344,12 @@ const Bookings = () => {
                     onChange={handleCity}
                     ref={cityRef}
                   >
-                    {cities.map((city) => (
-                      <option key={city.id} value={city.city_code}>
-                        {city.city_name}
-                      </option>
-                    ))}
+                    {cities &&
+                      cities.map((city) => (
+                        <option key={city.id} value={city.city_code}>
+                          {city.city_name}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -371,7 +386,7 @@ const Bookings = () => {
                       className="input text-[#464E5F] text-sm max-w-[10.8rem]"
                       {...register("exprCenter")}
                       onChange={handleExpress}
-                      ref={expressCenter}
+                      ref={expCenterRef}
                     >
                       {expressCenter &&
                         expressCenter.map((express) => (
@@ -620,13 +635,20 @@ const Bookings = () => {
                   <label className="label2">
                     Origin <span className="text-[#FF0000]">*</span>
                   </label>
-                  <input
+                  <select
                     type="text"
                     className="input2 text-[#464E5F] text-sm"
                     {...register("origin")}
                     ref={origin}
                     disabled
-                  />
+                  >
+                    {pkCities.length !== 0 &&
+                      pkCities.map((city) => (
+                        <option key={city.id} value={city.city_code}>
+                          {city.city_name}
+                        </option>
+                      ))}
+                  </select>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
