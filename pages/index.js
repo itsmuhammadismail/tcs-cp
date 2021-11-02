@@ -51,7 +51,7 @@ const Login = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col w-full h-[100vh]"
       style={{
-        backgroundImage: "url(/login-image.jpg)",
+        backgroundImage: "url(/login-Image.jpg)",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
