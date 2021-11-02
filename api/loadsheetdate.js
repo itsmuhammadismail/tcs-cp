@@ -1,4 +1,4 @@
-const loadsheetDate = async () => {
+const loadsheetDate = async (id) => {
     let header = {
       "Content-Type": "application/json",
       Authorization: "Token 36b8888c66697ed071786ba2cd8d4ed00e0dc0a6",
@@ -8,7 +8,7 @@ const loadsheetDate = async () => {
       method: "POST",
       redirect: "follow",
       headers: header,
-      body: JSON.stringify({ fk_costcenter: 21 })
+      body: JSON.stringify({ fk_costcenter: id })
 
     };
   

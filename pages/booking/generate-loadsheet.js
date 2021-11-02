@@ -13,6 +13,7 @@ import { costcentersState } from "../../recoil/atoms";
 import Cities from "../../api/cities";
 import { citiesState } from "../../recoil/atoms";
 import Loadsheetdate from "../../api/loadsheetdate";
+import LoadsheetTable from "../../components/LoadsheetTable";
 
 import {
   FormControl,
@@ -54,6 +55,11 @@ const GloadSheet = () => {
   const handleCostcenter = async (e) => {
     const resdate = await Loadsheetdate(e.target.value);
     setLoadsheetdate(resdate);
+    const center = costcenters.filter(
+      (costcenter) => +costcenter.id === +e.target.value
+    );
+    console.log(center);
+    setFkcity(center[0]["fk_city"]);
   };
 
   const {
@@ -113,8 +119,6 @@ const GloadSheet = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("labelGenerationDate", { required: true })}
-                    onChange={handleCostcenter}
-
                   >
                     {loadsheetdates.map((loadsheetdate) => (
                       <option
@@ -161,11 +165,11 @@ const GloadSheet = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("costcenters")}
-                    onChange={(e) => setFkcity(e.target.value)}
+                    onChange={handleCostcenter}
                   >
                     {costcenters &&
                       costcenters.map((costcenter) => (
-                        <option key={costcenter.id} value={costcenter.fk_city}>
+                        <option key={costcenter.id} value={costcenter.id}>
                           {costcenter.cost_center_code +
                             "-" +
                             costcenter.cost_center_name}
@@ -210,7 +214,9 @@ const GloadSheet = () => {
           {/* Loadsheet start */}
           <Card heading="Load Sheet Data">
             <div className="flex gap-6">
-              <div className="flex-1 flex flex-col gap-3 "></div>
+              <div className="flex-1 flex flex-col gap-3 ">
+                <LoadsheetTable />
+              </div>
             </div>
           </Card>
         </div>
