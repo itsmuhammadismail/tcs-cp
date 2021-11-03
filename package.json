@@ -30,6 +30,8 @@
     "react-hook-form": "^7.17.4",
     "recharts": "^2.1.4",
     "recoil": "^0.4.1",
+    "sweetalert2": "^11.1.9",
+    "sweetalert2-react-content": "^4.2.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

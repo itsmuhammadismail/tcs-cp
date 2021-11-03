@@ -28,6 +28,8 @@ import Costcenters from "../../api/costcenters";
 import Services from "../../api/services";
 import ExpressCenter from "../../api/expressCenter";
 import Booking from "../../api/booking";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const Bookings = () => {
   const [countries, setCountries] = useState([]);
@@ -58,6 +60,8 @@ const Bookings = () => {
   const servicesRef = useRef();
 
   const zipcode = useRef();
+
+  const MySwal = withReactContent(Swal);
 
   const {
     register,
@@ -201,6 +205,15 @@ const Bookings = () => {
       zip_code
     );
     console.log(res);
+
+    // await MySwal.fire({
+    //   title: "Booking Successfull",
+    //   icon: "success",
+    // });
+    await MySwal.fire({
+      title: "Booking Failed",
+      icon: "error",
+    });
   };
 
   return (
