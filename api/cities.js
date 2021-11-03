@@ -1,7 +1,8 @@
-const Cities = async ( countryId ) => {
+const Cities = async (countryId) => {
+  const token = localStorage.getItem("token");
   let header = {
     "Content-Type": "application/json",
-    Authorization: "Token 36b8888c66697ed071786ba2cd8d4ed00e0dc0a6",
+    Authorization: `Token ${token}`,
   };
 
   let requestOptions = {

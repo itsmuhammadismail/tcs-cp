@@ -103,7 +103,7 @@ const GloadSheet = () => {
                     {...register("shipmentType", { required: true })}
                   >
                     <option value="Please Select">
-                      All (Having All Types Of weight
+                      All (Having All Types Of weight)
                     </option>
                     <option value="Please Select">Single copy per page</option>
                     <option value="Please Select">6x4 labels</option>

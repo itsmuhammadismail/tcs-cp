@@ -1,18 +1,19 @@
-const Services = async (cost_center) => {
+const loadsheetConsignment = async (id) => {
   const token = localStorage.getItem("token");
   let header = {
     "Content-Type": "application/json",
     Authorization: `Token ${token}`,
   };
+
   let requestOptions = {
     method: "POST",
     redirect: "follow",
     headers: header,
-    body: JSON.stringify({ cost_center: cost_center }),
+    body: JSON.stringify({ fk_costcenter: id }),
   };
 
   const result = await fetch(
-    "http://uatportal.tcs.com.pk:8000/services/",
+    "http://uatportal.tcs.com.pk:8000/loadsheetconsigment/",
     requestOptions
   )
     .then((response) => response.json())
@@ -21,4 +22,4 @@ const Services = async (cost_center) => {
   return result;
 };
 
-export default Services;
+export default loadsheetConsignment;
