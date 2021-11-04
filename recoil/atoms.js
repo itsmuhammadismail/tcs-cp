@@ -29,3 +29,8 @@ export const loadsheetdateState = atom({
   key: "laodsheetdateState",
   default: [],
 });
+
+export const loadsheetconsignmentState = atom({
+  key: "loadsheetconsignment",
+  default: [],
+});

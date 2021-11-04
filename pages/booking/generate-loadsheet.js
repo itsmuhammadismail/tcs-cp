@@ -14,6 +14,8 @@ import Cities from "../../api/cities";
 import { citiesState } from "../../recoil/atoms";
 import Loadsheetdate from "../../api/loadsheetdate";
 import LoadsheetTable from "../../components/LoadsheetTable";
+import Loadsheetconsignment from "../../api/loadsheetconsignment";
+import { loadsheetconsignmentState } from "../../recoil/atoms";
 
 import {
   FormControl,
@@ -29,7 +31,7 @@ const GloadSheet = () => {
   const [costcenters, setCostcenters] = useState([]);
   const [cities, setCities] = useRecoilState(citiesState);
   const [loadsheetdates, setLoadsheetdate] = useRecoilState(loadsheetdateState);
-
+  const [loadsheetconsignment, setLoadsheetconsignment] = useRecoilState(loadsheetconsignment);
   const [fkcity, setFkcity] = useState("");
   const [selected, setSelected] = useState("");
 
@@ -208,6 +210,7 @@ const GloadSheet = () => {
             color="white"
             width="11rem"
             type="submit"
+            
           ></Button>
         </div>
         <div className="media mx-auto p-4 pt-2 flex gap-6">
