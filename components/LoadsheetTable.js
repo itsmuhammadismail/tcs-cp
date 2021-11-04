@@ -22,31 +22,57 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
-function createData(name, calories, fat, carbs, protein) {
+function createData(
+  sr,
+  Consignment,
+  CustomerRef,
+  Flyer,
+  Origin,
+  Destination,
+  Name,
+  Address,
+  Service,
+  LabelGenerationDate,
+  CODAmount,
+  BookedWeight,
+  ActualWeight,
+  Pieces,
+  ActualPieces
+) {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    sr,
+    Consignment,
+    CustomerRef,
+    Flyer,
+    Origin,
+    Destination,
+    Name,
+    Address,
+    Service,
+    LabelGenerationDate,
+    CODAmount,
+    BookedWeight,
+    ActualWeight,
+    Pieces,
+    ActualPieces,
   };
 }
 
-const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Honeycomb", 408, 3.2, 87, 6.5),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Jelly Bean", 375, 0.0, 94, 0.0),
-  createData("KitKat", 518, 26.0, 65, 7.0),
-  createData("Lollipop", 392, 0.2, 98, 0.0),
-  createData("Marshmallow", 318, 0, 81, 2.0),
-  createData("Nougat", 360, 19.0, 9, 37.0),
-  createData("Oreo", 437, 18.0, 63, 4.0),
-];
+// const rows = [
+//   createData("Cupcake", 305, 3.7, 67, 4.3),
+//   createData("Donut", 452, 25.0, 51, 4.9),
+//   createData("Eclair", 262, 16.0, 24, 6.0),
+//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+//   createData("Gingerbread", 356, 16.0, 49, 3.9),
+//   createData("Honeycomb", 408, 3.2, 87, 6.5),
+//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+//   createData("Jelly Bean", 375, 0.0, 94, 0.0),
+//   createData("KitKat", 518, 26.0, 65, 7.0),
+//   createData("Lollipop", 392, 0.2, 98, 0.0),
+//   createData("Marshmallow", 318, 0, 81, 2.0),
+//   createData("Nougat", 360, 19.0, 9, 37.0),
+//   createData("Oreo", 437, 18.0, 63, 4.0),
+// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -80,34 +106,104 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "name",
-    numeric: false,
+    id: "sr",
+    numeric: true,
     disablePadding: true,
-    label: "Dessert (100g serving)",
+    label: "SR #",
   },
   {
-    id: "calories",
+    id: "Consignment",
     numeric: true,
     disablePadding: false,
-    label: "Calories",
+    label: "Consignment",
   },
   {
-    id: "fat",
+    id: "CustomerRef",
     numeric: true,
     disablePadding: false,
-    label: "Fat (g)",
+    label: "Customer Ref#",
   },
   {
-    id: "carbs",
+    id: "Flyer#",
     numeric: true,
     disablePadding: false,
-    label: "Carbs (g)",
+    label: "Flyer #",
   },
   {
-    id: "protein",
+    id: "Origin",
+    numeric: false,
+    disablePadding: false,
+    label: "Origin",
+  },
+
+  {
+    id: "Destination",
+    numeric: false,
+    disablePadding: false,
+    label: "Destination",
+  },
+
+  {
+    id: "Name",
+    numeric: false,
+    disablePadding: false,
+    label: "Name",
+  },
+
+  {
+    id: "Address",
+    numeric: false,
+    disablePadding: false,
+    label: "Address",
+  },
+
+  {
+    id: "Service",
+    numeric: false,
+    disablePadding: false,
+    label: "Service",
+  },
+
+  {
+    id: "LabelGenerationDate",
     numeric: true,
     disablePadding: false,
-    label: "Protein (g)",
+    label: "Label Generation Date",
+  },
+
+  {
+    id: "CODAmount",
+    numeric: true,
+    disablePadding: false,
+    label: "COD Amount",
+  },
+
+  {
+    id: "BookedWeight",
+    numeric: true,
+    disablePadding: false,
+    label: "Booked Weight",
+  },
+
+  {
+    id: "ActualWeight",
+    numeric: true,
+    disablePadding: false,
+    label: "Actual Weight",
+  },
+
+  {
+    id: "Pieces",
+    numeric: true,
+    disablePadding: false,
+    label: "Pieces",
+  },
+
+  {
+    id: "ActualPieces",
+    numeric: true,
+    disablePadding: false,
+    label: "Actual Pieces",
   },
 ];
 
@@ -231,13 +327,19 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ tableData }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
+  const [rows, setRows] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  React.useEffect(() => {
+    console.log(tableData);
+    console.log(rows);
+    if (tableData !== null) setRows(tableData);
+  }, [tableData]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -283,10 +385,6 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -301,7 +399,7 @@ export default function EnhancedTable() {
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            size={"medium"}
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -327,7 +425,7 @@ export default function EnhancedTable() {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.consigment_number}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -347,17 +445,35 @@ export default function EnhancedTable() {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">
+                        {row.consigment_number}
+                      </TableCell>
+                      <TableCell align="right">
+                        {row.product_refrence}
+                      </TableCell>
+                      <TableCell align="right"></TableCell>
+                      <TableCell align="right">{row.origin_city}</TableCell>
+                      <TableCell align="right">
+                        {row.destination_city}
+                      </TableCell>
+                      <TableCell align="right">{row.consignee_name}</TableCell>
+                      <TableCell align="right">
+                        {row.consignee_address}
+                      </TableCell>
+                      <TableCell align="right">{row.service_name}</TableCell>
+                      <TableCell align="right">{row.booking_dt}</TableCell>
+                      <TableCell align="right">{row.cod_amount}</TableCell>
+                      <TableCell align="right">{row.weight}</TableCell>
+                      <TableCell align="right"></TableCell>
+                      <TableCell align="right">{row.pieces}</TableCell>
+                      <TableCell align="right"></TableCell>
                     </TableRow>
-                  );
+                  );git
                 })}
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 53 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />
@@ -376,10 +492,6 @@ export default function EnhancedTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   );
 }
