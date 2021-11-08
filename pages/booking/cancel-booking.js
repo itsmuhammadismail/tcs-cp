@@ -39,13 +39,11 @@ const CancelBooking = () => {
                   <label className="label">
                     From Date <span className="text-[#FF0000]">*</span>
                   </label>
-                  <select
+                  <input
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("fromDate", { required: true })}
-                  >
-                    <option value="Please Select">Please Select</option>
-                  </select>
+                  ></input>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -64,6 +62,18 @@ const CancelBooking = () => {
                       </span>
                     )}
                   </div>
+                </div>
+                <div className="flex-1 flex items-center gap-4 w-full">
+                  <label className="label">
+                    Cost Center <span className="text-[#FF0000]">*</span>
+                  </label>
+                  <select
+                    type="text"
+                    className="input text-[#464E5F] text-sm"
+                    {...register("costCenter", { required: true })}
+                  >
+                    <option value="Please Select">Please Select</option>
+                  </select>
                 </div>
                 {/* 
                 <div className="flex-1 flex items-center gap-4 w-full">
