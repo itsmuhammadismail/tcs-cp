@@ -10,6 +10,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Costcenters from "../../api/costcenters";
 import { costcentersState } from "../../recoil/atoms";
+import LoadsheetTable from "../../components/LoadsheetTable";
 
 import {
   FormControl,
@@ -32,6 +33,7 @@ const CancelBooking = () => {
   const [custom, setCustom] = useState(false);
   const onSubmit = (data) => console.log(data);
   const [costcenters, setCostcenters] = useState([]);
+  const [tableData, setTableData] = useState(null);
 
   useEffect(async () => {
     const rescost = await Costcenters();
@@ -45,6 +47,7 @@ const CancelBooking = () => {
   const handleHideDate = () => {
     setShowdate(false);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Head>
@@ -214,6 +217,18 @@ const CancelBooking = () => {
             type="submit"
           ></Button>
         </div>
+        {tableData !== null && (
+          <div className="media mx-auto p-4 pt-2 flex gap-6 w-full">
+            {/* Loadsheet start */}
+            <Card heading="Load Sheet Data">
+              <div className="flex gap-6 overflow-auto">
+                <div className="flex-1 flex flex-col gap-3 ">
+                  <LoadsheetTable tableData={tableData} />
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
       </Layout>
     </form>
   );
