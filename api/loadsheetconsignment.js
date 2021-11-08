@@ -2,6 +2,7 @@ const loadsheetConsignment = async (fk_costcenter, booking_date) => {
   const token = localStorage.getItem("token");
   let header = {
     "Content-Type": "application/json",
+    Accept: "application/json",
     Authorization: `Token ${token}`,
   };
 
@@ -18,9 +19,8 @@ const loadsheetConsignment = async (fk_costcenter, booking_date) => {
   const result = await fetch(
     "http://uatportal.tcs.com.pk:8000/loadsheetconsigment/",
     requestOptions
-  )
-    .then((response) => response.json())
-    .catch((error) => console.log("error", error));
+  ).then((response) => response.json());
+  // .catch((error) => console.log("error", error));
 
   return result;
 };

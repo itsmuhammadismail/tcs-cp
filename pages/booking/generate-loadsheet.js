@@ -51,7 +51,7 @@ const GloadSheet = () => {
   useEffect(async () => {
     const rescost = await Costcenters();
     const res = await Cities(1);
-    const resdate = await Loadsheetdate(0);
+    const resdate = await Loadsheetdate(rescost[0].id);
     setLoadsheetdate(resdate);
     setCities(res);
     setCostcenters(rescost);
@@ -83,7 +83,7 @@ const GloadSheet = () => {
   };
 
   useEffect(
-    () => console.log("Table data from generate",  tableData),
+    () => console.log("Table data from generate", tableData),
     [tableData]
   );
 

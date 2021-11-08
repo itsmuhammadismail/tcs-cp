@@ -45,7 +45,7 @@ const Bookings = () => {
   const consigneeAddress = useRef();
 
   const customerName = useRef();
-  const contactNumber = useRef();
+  const contactNumberRef = useRef();
   const customerEmail = useRef();
   const contactPerson = useRef();
   const customerAddress = useRef();
@@ -81,7 +81,7 @@ const Bookings = () => {
     setPkCities(res);
     const rescost = await Costcenters();
     setCostcenters(rescost);
-    contactNumber.current.value = rescost[0].phone_number;
+    contactNumberRef.current.value = rescost[0].phone_number;
     customerEmail.current.value = rescost[0].email;
     customerAddress.current.value = rescost[0].pickup_address;
 
@@ -475,7 +475,7 @@ const Bookings = () => {
                   disabled
                   className="input2"
                   {...register("contactNumber")}
-                  ref={contactNumber}
+                  ref={contactNumberRef}
                 />
               </div>
               <div className="flex-1 flex items-center gap-4 w-full">

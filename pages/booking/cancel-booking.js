@@ -5,7 +5,6 @@ import Card from "../../components/Bookings/Card";
 import Button from "../../components/Button";
 import { parseCookies } from "../../helpers";
 
-
 import {
   FormControl,
   FormControlLabel,
@@ -66,18 +65,6 @@ const CancelBooking = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex-1 flex items-center gap-4 w-full">
-                  <label className="label">
-                    Cost Center <span className="text-[#FF0000]">*</span>
-                  </label>
-                  <select
-                    type="text"
-                    className="input text-[#464E5F] text-sm"
-                    {...register("costCenter", { required: true })}
-                  >
-                    <option value="Please Select">Please Select</option>
-                  </select>
-                </div>
                 {/* 
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -96,13 +83,13 @@ const CancelBooking = () => {
               {/* Right */}
               <div className="flex-1 flex flex-col gap-3 ">
                 <div className="flex-1 flex items-center gap-4 w-full">
-                  <label className="label2">
-                    To Date <span className="text-[#FF0000]">*</span>
+                  <label className="label">
+                    Cost Center <span className="text-[#FF0000]">*</span>
                   </label>
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("toDate", { required: true })}
+                    {...register("costCenter", { required: true })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
