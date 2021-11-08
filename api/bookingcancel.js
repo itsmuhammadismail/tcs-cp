@@ -1,4 +1,4 @@
-const Bookingcancel = async () => {
+const Bookingcancel = async (from_date, to_date, fk_cost_center) => {
     const token = localStorage.getItem("token");
     let header = {
       "Content-Type": "application/json",
@@ -9,6 +9,12 @@ const Bookingcancel = async () => {
       method: "POST",
       redirect: "follow",
       headers: header,
+      body: JSON.stringify({
+      from_date : from_date,
+      to_date : to_date,
+      fk_cost_center : fk_cost_center,
+      }),
+    };
     };
   
     const result = await fetch(

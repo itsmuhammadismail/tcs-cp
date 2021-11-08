@@ -4,6 +4,12 @@ import BookingLayout from "../../components/Bookings/BookingLayout";
 import Card from "../../components/Bookings/Card";
 import Button from "../../components/Button";
 import { parseCookies } from "../../helpers";
+import { useEffect, useRef, useState } from "react";
+import StaticDateRangePicker from "@mui/lab/StaticDateRangePicker";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import Costcenters from "../../api/costcenters";
+import { costcentersState } from "../../recoil/atoms";
 
 import {
   FormControl,
@@ -13,6 +19,7 @@ import {
 } from "@mui/material";
 
 import { useForm } from "react-hook-form";
+import { ConstructionOutlined } from "@mui/icons-material";
 const CancelBooking = () => {
   const {
     register,
@@ -20,7 +27,24 @@ const CancelBooking = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const [showdate, setShowdate] = useState(false);
+  const [value, setValue] = useState([new Date(), new Date()]);
+  const [custom, setCustom] = useState(false);
   const onSubmit = (data) => console.log(data);
+  const [costcenters, setCostcenters] = useState([]);
+
+  useEffect(async () => {
+    const rescost = await Costcenters();
+    setCostcenters(rescost);
+  }, []);
+
+  const handleDate = () => {
+    setShowdate(true);
+  };
+
+  const handleHideDate = () => {
+    setShowdate(false);
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Head>
@@ -37,13 +61,37 @@ const CancelBooking = () => {
               <div className="flex-1 flex flex-col gap-3 ">
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
-                    From Date <span className="text-[#FF0000]">*</span>
+                    Date Range <span className="text-[#FF0000]">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="input text-[#464E5F] text-sm"
-                    {...register("fromDate", { required: true })}
-                  ></input>
+                  <div className="flex-1 ">
+                    <input
+                      type="text"
+                      className="input text-[#464E5F] text-sm w-full"
+                      {...register("fromDate", { required: true })}
+                      onFocus={handleDate}
+                      onBlur={handleHideDate}
+                    ></input>
+                    {showdate && (
+                      <div className="border-l-2 absolute">
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                          <StaticDateRangePicker
+                            displayStaticWrapperAs="desktop"
+                            value={value}
+                            onChange={(newValue) => {
+                              setValue(newValue);
+                            }}
+                            renderInput={(startProps, endProps) => (
+                              <>
+                                <TextField {...startProps} />
+                                <Box sx={{ mx: 2 }}> to </Box>
+                                <TextField {...endProps} />
+                              </>
+                            )}
+                          />
+                        </LocalizationProvider>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -63,7 +111,7 @@ const CancelBooking = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex-1 flex items-center gap-4 w-full">
+                {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     Cost Center <span className="text-[#FF0000]">*</span>
                   </label>
@@ -74,7 +122,7 @@ const CancelBooking = () => {
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
-                </div>
+                </div> */}
                 {/* 
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -101,11 +149,18 @@ const CancelBooking = () => {
                     className="input text-[#464E5F] text-sm"
                     {...register("costCenter", { required: true })}
                   >
-                    <option value="Please Select">Please Select</option>
+                    {costcenters &&
+                      costcenters.map((costcenter) => (
+                        <option key={costcenter.id} value={costcenter.id}>
+                          {costcenter.cost_center_code +
+                            "-" +
+                            costcenter.cost_center_name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="flex-1 flex items-center gap-3 w-full">
-                  <label className="label2">
+                  <label className="label">
                     To Consignement Number{" "}
                     <span className="text-[#FF0000]">*</span>
                   </label>
