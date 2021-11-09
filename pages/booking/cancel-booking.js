@@ -17,6 +17,8 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  TextField,
+  Box,
 } from "@mui/material";
 
 import { useForm } from "react-hook-form";
@@ -35,9 +37,12 @@ const CancelBooking = () => {
   const [costcenters, setCostcenters] = useState([]);
   const [tableData, setTableData] = useState(null);
 
-  useEffect(async () => {
-    const rescost = await Costcenters();
-    setCostcenters(rescost);
+  useEffect(() => {
+    const fn = async () => {
+      const rescost = await Costcenters();
+      setCostcenters(rescost);
+    };
+    fn();
   }, []);
 
   const handleDate = () => {
