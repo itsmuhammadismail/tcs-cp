@@ -16,6 +16,13 @@ const loadsheetConsignment = async (fk_costcenter, booking_date) => {
     }),
   };
 
+  console.log(
+    JSON.stringify({
+      fk_costcenter: fk_costcenter,
+      booking_date: booking_date,
+    })
+  );
+
   const result = await fetch(
     "http://uatportal.tcs.com.pk:8000/loadsheetconsigment/",
     requestOptions
