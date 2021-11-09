@@ -327,6 +327,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
+let sr = 1;
 export default function EnhancedTable({ tableData }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -443,7 +444,7 @@ export default function EnhancedTable({ tableData }) {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {sr++}
                       </TableCell>
                       <TableCell align="right">
                         {row.consigment_number}
@@ -468,7 +469,8 @@ export default function EnhancedTable({ tableData }) {
                       <TableCell align="right">{row.pieces}</TableCell>
                       <TableCell align="right"></TableCell>
                     </TableRow>
-                  );git
+                  );
+                  git;
                 })}
               {emptyRows > 0 && (
                 <TableRow
