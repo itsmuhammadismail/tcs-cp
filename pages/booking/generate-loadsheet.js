@@ -14,6 +14,8 @@ import Cities from "../../api/cities";
 import { citiesState } from "../../recoil/atoms";
 import Loadsheetdate from "../../api/loadsheetdate";
 import LoadsheetTable from "../../components/LoadsheetTable";
+import Loadsheetconsignment from "../../api/loadsheetconsignment";
+import { loadsheetconsignmentState } from "../../recoil/atoms";
 
 import {
   FormControl,
@@ -29,9 +31,12 @@ const GloadSheet = () => {
   const [costcenters, setCostcenters] = useState([]);
   const [cities, setCities] = useRecoilState(citiesState);
   const [loadsheetdates, setLoadsheetdate] = useRecoilState(loadsheetdateState);
-
+  const [loadsheetconsignment, setLoadsheetconsignment] = useState(null);
   const [fkcity, setFkcity] = useState("");
   const [selected, setSelected] = useState("");
+  const [tableData, setTableData] = useState(null);
+  const labelDateRef = useRef();
+  const originRef = useRef();
 
   useEffect(() => {
     console.log("Selected change");
@@ -46,7 +51,7 @@ const GloadSheet = () => {
   useEffect(async () => {
     const rescost = await Costcenters();
     const res = await Cities(1);
-    const resdate = await Loadsheetdate(0);
+    const resdate = await Loadsheetdate(rescost[0].id);
     setLoadsheetdate(resdate);
     setCities(res);
     setCostcenters(rescost);
@@ -68,7 +73,20 @@ const GloadSheet = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const reslabeldata = await Loadsheetconsignment(
+      data.costcenters,
+      labelDateRef.current.value
+    );
+
+    setTableData(reslabeldata);
+  };
+
+  useEffect(
+    () => console.log("Table data from generate", tableData),
+    [tableData]
+  );
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Head>
@@ -87,11 +105,18 @@ const GloadSheet = () => {
                   <label className="label">
                     Employee Code <span className="text-[#FF0000]">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="input text-[#464E5F] text-sm"
-                    {...register("employeeCode", { required: true })}
-                  ></input>
+                  <div className="flex flex-col flex-1">
+                    <input
+                      type="text"
+                      className="input text-[#464E5F] text-sm w-full"
+                      {...register("employeeCode", { required: true })}
+                    />
+                    {errors.employeeCode && (
+                      <span className="requiredField">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
@@ -100,14 +125,16 @@ const GloadSheet = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("shipmentType", { required: true })}
+                    {...register("shipmentType")}
                   >
-                    <option value="Please Select">
-                      All (Having All Types Of weight
+                    <option value="All">
+                      All (Having All Types Of weight)
                     </option>
-                    <option value="Please Select">Single copy per page</option>
-                    <option value="Please Select">6x4 labels</option>
-                    <option value="Please Select">3 labels per page</option>
+                    <option value="Single copy per page">
+                      Single copy per page
+                    </option>
+                    <option value="6x4 labels">6x4 labels</option>
+                    <option value="3 labels per page">3 labels per page</option>
                   </select>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
@@ -118,7 +145,8 @@ const GloadSheet = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("labelGenerationDate", { required: true })}
+                    {...register("labelGenerationDate")}
+                    ref={labelDateRef}
                   >
                     {loadsheetdates.map((loadsheetdate) => (
                       <option
@@ -151,11 +179,18 @@ const GloadSheet = () => {
                   <label className="label2">
                     Employee Name <span className="text-[#FF0000]">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="input text-[#464E5F] text-sm"
-                    {...register("employeeName", { required: true })}
-                  ></input>
+                  <div className="flex flex-col flex-1">
+                    <input
+                      type="text"
+                      className="input text-[#464E5F] text-sm"
+                      {...register("employeeName", { required: true })}
+                    />
+                    {errors.employeeName && (
+                      <span className="requiredField">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label2">
@@ -185,9 +220,10 @@ const GloadSheet = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("origin", { required: true })}
+                    {...register("origin")}
                     value={selected}
                     disabled
+                    ref={originRef}
                   >
                     {cities.map((city) => (
                       <option key={city.id} value={city.city_code}>
@@ -210,16 +246,18 @@ const GloadSheet = () => {
             type="submit"
           ></Button>
         </div>
-        <div className="media mx-auto p-4 pt-2 flex gap-6">
-          {/* Loadsheet start */}
-          <Card heading="Load Sheet Data">
-            <div className="flex gap-6">
-              <div className="flex-1 flex flex-col gap-3 ">
-                <LoadsheetTable />
+        {tableData !== null && (
+          <div className="media mx-auto p-4 pt-2 flex gap-6 w-full">
+            {/* Loadsheet start */}
+            <Card heading="Load Sheet Data">
+              <div className="flex gap-6 overflow-auto">
+                <div className="flex-1 flex flex-col gap-3 ">
+                  <LoadsheetTable tableData={tableData} />
+                </div>
               </div>
-            </div>
-          </Card>
-        </div>
+            </Card>
+          </div>
+        )}
       </Layout>
     </form>
   );

@@ -270,4 +270,13 @@ a {
 .requiredField {
   @apply text-xs mt-1 text-[#FF0000];
 }
+
+.container {
+  overflow-x: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
+  padding: 10px;
+  margin: 10px;
+}
 /*# sourceMappingURL=globals.css.map */
