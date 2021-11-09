@@ -206,14 +206,14 @@ const Bookings = () => {
     );
     console.log(res);
 
-    // await MySwal.fire({
-    //   title: "Booking Successfull",
-    //   icon: "success",
-    // });
     await MySwal.fire({
-      title: "Booking Failed",
-      icon: "error",
+      title: "Booking Successfull",
+      icon: "success",
     });
+    // await MySwal.fire({
+    //   title: "Booking Failed",
+    //   icon: "error",
+    // });
   };
 
   return (
