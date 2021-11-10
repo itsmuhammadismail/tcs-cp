@@ -70,43 +70,45 @@ const Bookings = () => {
     formState: { errors },
   } = useForm();
 
-  useEffect(async () => {
-    let cont = [];
-    if (countries.length === 0) {
-      setCountries(JSON.parse(localStorage.getItem("countries")));
-      cont = JSON.parse(localStorage.getItem("countries"));
-      console.log(cont)
-    }
-    const res = await Cities(1);
-    setCities(res);
-    setPkCities(res);
-    const rescost = await Costcenters();
-    setCostcenters(rescost);
-    contactNumberRef.current.value = rescost[0].phone_number;
-    customerEmail.current.value = rescost[0].email;
-    customerAddress.current.value = rescost[0].pickup_address;
+  useEffect(() => {
+    const fn = async () => {
+      let cont = [];
+      if (countries.length === 0) {
+        setCountries(JSON.parse(localStorage.getItem("countries")));
+        cont = JSON.parse(localStorage.getItem("countries"));
+        console.log(cont);
+      }
+      const res = await Cities(1);
+      setCities(res);
+      setPkCities(res);
+      const rescost = await Costcenters();
+      setCostcenters(rescost);
+      contactNumberRef.current.value = rescost[0].phone_number;
+      customerEmail.current.value = rescost[0].email;
+      customerAddress.current.value = rescost[0].pickup_address;
 
-    const resservice = await Services(21);
-    setServices(resservice);
-    const resExp = await ExpressCenter(res[0].city_code);
+      const resservice = await Services(21);
+      setServices(resservice);
+      const resExp = await ExpressCenter(res[0].city_code);
 
-    setExpressCenter(resExp["items"]);
-    if (resExp["items"][0] !== undefined)
-      consigneeAddress.current.value = resExp["items"][0].address;
+      setExpressCenter(resExp["items"]);
+      if (resExp["items"][0] !== undefined)
+        consigneeAddress.current.value = resExp["items"][0].address;
 
-    let originCountry = rescost[0].fk_country;
-    let originCity = rescost[0].fk_city;
+      let originCountry = rescost[0].fk_country;
+      let originCity = rescost[0].fk_city;
 
-    for (let country of cont) {
-      let theCities = await Cities(originCountry);
-      if (country.id == originCountry) {
-        for (let city of theCities) {
-          if (city.id == originCity) {
-            origin.current.value = city.city_code;
+      for (let country of cont) {
+        let theCities = await Cities(originCountry);
+        if (country.id == originCountry) {
+          for (let city of theCities) {
+            if (city.id == originCity) {
+              origin.current.value = city.city_code;
+            }
           }
         }
       }
-    }
+    };
   }, []);
 
   const handleCountry = async (e) => {
@@ -135,7 +137,6 @@ const Bookings = () => {
   const handleCostcenter = async (e) => {
     const resservice = await Services(e.target.value);
     setServices(resservice);
-   
   };
 
   const [boxAvailability, setBoxAvailability] = useState("yes");

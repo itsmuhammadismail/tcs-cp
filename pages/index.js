@@ -6,6 +6,9 @@ import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { CircularProgress } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import useCostCenters from "../hooks/useCostCenters";
+import useCountries from "../hooks/useCountries";
+import Countries from "../api/countries";
 
 const Login = () => {
   const {
@@ -32,6 +35,8 @@ const Login = () => {
         maxAge: 7200, // Expires after 2hr
         sameSite: true,
       });
+      const country = await Countries();
+      localStorage.setItem("countries", JSON.stringify(country));
       router.push("/dashboard");
     } else {
       setIsLoading(false);
