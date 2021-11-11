@@ -26,8 +26,8 @@ const BulkImport = () => {
 
   useEffect(() => {
     const fn = async () => {
-      const rescost = await Costcenters();
-      setCostcenters(rescost);
+      // const rescost = await Costcenters();
+      setCostcenters(JSON.parse(localStorage.getItem("costcenters")));
       const res = await Cities(1);
       setPkCities(res);
     };
