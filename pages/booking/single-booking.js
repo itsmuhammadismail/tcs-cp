@@ -137,6 +137,14 @@ const Bookings = () => {
   const handleCostcenter = async (e) => {
     const resservice = await Services(e.target.value);
     setServices(resservice);
+    for (let cc of costcenters) {
+      if (cc.id === +e.target.value) {
+        console.log(cc.fk_city);
+        let city = pkCities.filter((c) => +c.id == +cc.fk_city);
+        console.log(city[0], "city");
+        origin.current.value = city[0].city_code;
+      }
+    }
   };
 
   const [boxAvailability, setBoxAvailability] = useState("yes");
