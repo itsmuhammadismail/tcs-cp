@@ -9,6 +9,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import useCostCenters from "../hooks/useCostCenters";
 import useCountries from "../hooks/useCountries";
 import Countries from "../api/countries";
+import Costcenters from "../api/costcenters";
 
 const Login = () => {
   const {
@@ -37,6 +38,8 @@ const Login = () => {
       });
       const country = await Countries();
       localStorage.setItem("countries", JSON.stringify(country));
+      const costCenters = await Costcenters();
+      localStorage.setItem("costcenters", JSON.stringify(costCenters));
       router.push("/dashboard");
     } else {
       setIsLoading(false);
