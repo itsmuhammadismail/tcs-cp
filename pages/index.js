@@ -8,6 +8,7 @@ import { CircularProgress } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import Countries from "../api/countries";
 import Costcenters from "../api/costcenters";
+import Cities from "../api/cities";
 
 const Login = () => {
   const {
@@ -38,6 +39,8 @@ const Login = () => {
       localStorage.setItem("countries", JSON.stringify(country));
       const costCenters = await Costcenters();
       localStorage.setItem("costcenters", JSON.stringify(costCenters));
+      const pkcities = await Cities(1);
+      localStorage.setItem("pkcities", JSON.stringify(pkcities));
       router.push("/dashboard");
     } else {
       setIsLoading(false);
