@@ -11,6 +11,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Costcenters from "../../api/costcenters";
 import { costcentersState } from "../../recoil/atoms";
 import LoadsheetTable from "../../components/LoadsheetTable";
+import useVisible from "../../hooks/useVisible";
 
 import {
   FormControl,
@@ -23,6 +24,8 @@ import {
 
 import { useForm } from "react-hook-form";
 import { ConstructionOutlined } from "@mui/icons-material";
+import moment from "moment";
+
 const CancelBooking = () => {
   const {
     register,
@@ -37,21 +40,27 @@ const CancelBooking = () => {
   const [costcenters, setCostcenters] = useState([]);
   const [tableData, setTableData] = useState(null);
 
+  const ref = useRef();
+
   useEffect(() => {
     const fn = async () => {
-      const rescost = await Costcenters();
-      setCostcenters(rescost);
+      // const rescost = await Costcenters();
+      setCostcenters(JSON.parse(localStorage.getItem("costcenters")));
     };
     fn();
   }, []);
 
   const handleDate = () => {
-    setShowdate(true);
+    showdate ? setShowdate(false) : setShowdate(true);
   };
 
   const handleHideDate = () => {
     setShowdate(false);
   };
+
+  useVisible(ref, () => {
+    setShowdate(false);
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -71,13 +80,16 @@ const CancelBooking = () => {
                   <label className="label">
                     Date Range <span className="text-[#FF0000]">*</span>
                   </label>
-                  <div className="flex-1 ">
+                  <div className="flex-1 " ref={ref}>
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm w-full"
                       {...register("fromDate", { required: true })}
-                      onFocus={handleDate}
-                      onBlur={handleHideDate}
+                      onClick={handleDate}
+                      value={`
+                        ${moment(value[0]).format("L")} 
+                        -
+                        ${moment(value[1]).format("L")}`}
                     ></input>
                     {showdate && (
                       <div className="border-l-2 absolute">
