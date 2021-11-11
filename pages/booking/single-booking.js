@@ -97,8 +97,9 @@ const Bookings = () => {
       let originCountry = rescost[0].fk_country;
       let originCity = rescost[0].fk_city;
 
+      // let theCities = await Cities(originCountry);
+      let theCities = JSON.parse(localStorage.getItem("pkcities"));
       for (let country of cont) {
-        let theCities = await Cities(originCountry);
         if (country.id == originCountry) {
           for (let city of theCities) {
             if (city.id == originCity) {
