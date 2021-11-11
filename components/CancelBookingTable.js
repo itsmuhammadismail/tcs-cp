@@ -80,34 +80,64 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "name",
+    id: "consigment_number",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)",
+    label: "Consigment Number",
   },
   {
-    id: "calories",
+    id: "consignee_address",
     numeric: true,
     disablePadding: false,
-    label: "Calories",
+    label: "Consignee Address",
   },
   {
-    id: "fat",
+    id: "destination_city",
     numeric: true,
     disablePadding: false,
-    label: "Fat (g)",
+    label: "Destination City",
   },
   {
-    id: "carbs",
+    id: "destination_country",
     numeric: true,
     disablePadding: false,
-    label: "Carbs (g)",
+    label: "Destination Country",
   },
   {
-    id: "protein",
+    id: "fk_cost_center",
     numeric: true,
     disablePadding: false,
-    label: "Protein (g)",
+    label: "fk_cost_center",
+  },
+  {
+    id: "is_fragile",
+    numeric: true,
+    disablePadding: false,
+    label: "Is fragile",
+  },
+  {
+    id: "origin_city",
+    numeric: true,
+    disablePadding: false,
+    label: "Origin City",
+  },
+  {
+    id: "pieces",
+    numeric: true,
+    disablePadding: false,
+    label: "Pieces",
+  },
+  {
+    id: "weight",
+    numeric: true,
+    disablePadding: false,
+    label: "weight",
+  },
+  {
+    id: "created_at",
+    numeric: true,
+    disablePadding: false,
+    label: "created At",
   },
 ];
 
