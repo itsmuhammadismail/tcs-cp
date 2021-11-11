@@ -10,7 +10,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Costcenters from "../../api/costcenters";
 import { costcentersState } from "../../recoil/atoms";
-import LoadsheetTable from "../../components/LoadsheetTable";
+import CancelBookingTable from "../../components/CancelBookingTable";
 import useVisible from "../../hooks/useVisible";
 import { Providers } from "../../api/provider";
 
@@ -37,11 +37,12 @@ const CancelBooking = () => {
   const [showdate, setShowdate] = useState(false);
   const [value, setValue] = useState([new Date(), new Date()]);
   const [custom, setCustom] = useState(false);
-  // const onSubmit = (data) => console.log(data);
   const [costcenters, setCostcenters] = useState([]);
   const [tableData, setTableData] = useState(null);
 
   const ref = useRef();
+
+  const costCenterRef = useRef();
 
   useEffect(() => {
     const fn = async () => {
@@ -75,6 +76,7 @@ const CancelBooking = () => {
     }
     const response = await new Providers().fetchCancelBooking(payload);
   }
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -127,7 +129,7 @@ const CancelBooking = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex-1 flex items-center gap-4 w-full">
+                {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     From Consignement Number
                     <span className="text-[#FF0000]">*</span>
@@ -144,7 +146,7 @@ const CancelBooking = () => {
                       </span>
                     )}
                   </div>
-                </div>
+                </div> */}
                 {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     Cost Center <span className="text-[#FF0000]">*</span>
@@ -182,6 +184,7 @@ const CancelBooking = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("costCenter", { required: true })}
+                    ref={costCenterRef}
                   >
                     {costcenters &&
                       costcenters.map((costcenter) => (
@@ -193,7 +196,7 @@ const CancelBooking = () => {
                       ))}
                   </select>
                 </div>
-                <div className="flex-1 flex items-center gap-3 w-full">
+                {/* <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label">
                     To Consignement Number{" "}
                     <span className="text-[#FF0000]">*</span>
@@ -210,7 +213,7 @@ const CancelBooking = () => {
                       </span>
                     )}
                   </div>
-                </div>
+                </div> */}
 
                 {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
@@ -254,7 +257,7 @@ const CancelBooking = () => {
             <Card heading="Load Sheet Data">
               <div className="flex gap-6 overflow-auto">
                 <div className="flex-1 flex flex-col gap-3 ">
-                  <LoadsheetTable tableData={tableData} />
+                  <data tableData={tableData} />
                 </div>
               </div>
             </Card>

@@ -13,7 +13,7 @@ import { parseCookies } from "../helpers/";
 export default function Home() {
   const [dateDropdown, setDateDropdown] = useState(false);
   const handleDateDropdown = () => {
-    dateDropdown ? setDateDropdown(false) : setDateDropdown(true);
+  dateDropdown ? setDateDropdown(false) : setDateDropdown(true);
   };
 
   useEffect(async () => await Countries(), []);
