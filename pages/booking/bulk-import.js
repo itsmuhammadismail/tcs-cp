@@ -8,9 +8,9 @@ import Costcenters from "../../api/costcenters";
 import { useForm } from "react-hook-form";
 import { useEffect, useState, useRef } from "react";
 import Cities from "../../api/cities";
-import {Providers} from './../../api/provider';
-import {ExcelRenderer, OutTable} from 'react-excel-renderer';
-import {uploadFileValidations} from '../../_common/common-methods';
+import { Providers } from "./../../api/provider";
+import { ExcelRenderer, OutTable } from "react-excel-renderer";
+import { uploadFileValidations } from "../../_common/common-methods";
 
 const BulkImport = () => {
   const [costcenters, setCostcenters] = useState(null);
@@ -25,48 +25,51 @@ const BulkImport = () => {
   const costcenterRef = useRef();
   const origin = useRef();
 
-  const handleCostcenter = async (e) => { 
+  const handleCostcenter = async (e) => {
     const value = e.target.value;
     console.log(pkCities.find((data) => data.id == value));
     // const getOrigin = await new Providers().getOrigin(e.target.value);
-    // if(getOrigin.status==200) { 
+    // if(getOrigin.status==200) {
 
     // }
   };
 
   useEffect(() => {
     const fn = async () => {
+      // const rescost = await Costcenters();
+      setCostcenters(JSON.parse(localStorage.getItem("costcenters")));
+
       const rescost = await Costcenters();
       console.log(rescost);
       setCostcenters(rescost);
+
       const res = await Cities(1);
       setPkCities(res);
     };
     fn();
   }, []);
 
-  const onSubmit =  (async (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    const uploadfile = data.file[0]; 
+    const uploadfile = data.file[0];
 
     const validation = uploadFileValidations(uploadfile);
-    if(validation.error) {
+    if (validation.error) {
       console.log(validation.msg);
       return;
     }
 
     ExcelRenderer(uploadfile, (err, resp) => {
-      if(err){
-        console.log(err);            
-      }
-      else{
+      if (err) {
+        console.log(err);
+      } else {
         const data = resp.rows.slice(1);
-        if(data.length == 0) { 
-          return 'data not found';
+        if (data.length == 0) {
+          return "data not found";
         }
         const csvRow = [];
         data.map((data) => {
-          if(data.length > 0) {
+          if (data.length > 0) {
             csvRow.push(uploadObject(data));
           }
         });
@@ -76,28 +79,27 @@ const BulkImport = () => {
         //   rows: resp.rows
         // });
       }
-    });   
-  });
-
+    });
+  };
 
   const uploadObject = (data) => {
     return {
-      consigneeName: data[0],
+      consigneeName: data[0],
       consigneeAddress: data[1],
       consigneeMobile: data[2],
-      consigneeEmail: data[3],  
+      consigneeEmail: data[3],
       destinationCity: data[4],
       pieces: data[5],
-      weight: data[6], 
+      weight: data[6],
       codamount: data[7],
       referenceNumber: data[8],
       specialHandling: data[9],
       serviceType: data[10],
       productDetails: data[11],
-      remarks: 	data[12],
-      insurance: data[13]
-    }
-  }
+      remarks: data[12],
+      insurance: data[13],
+    };
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

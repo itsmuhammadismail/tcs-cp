@@ -56,7 +56,7 @@ const Booking = async (
       is_fragile,
       is_insurance,
       insurance_value,
-      product_detail,
+      product_dgetetail,
       cod_amount,
       product_refrence,
       delivery_type,

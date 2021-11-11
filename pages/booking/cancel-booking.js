@@ -10,7 +10,8 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Costcenters from "../../api/costcenters";
 import { costcentersState } from "../../recoil/atoms";
-import LoadsheetTable from "../../components/LoadsheetTable";
+import CancelBookingTable from "../../components/CancelBookingTable";
+import useVisible from "../../hooks/useVisible";
 
 import {
   FormControl,
@@ -23,6 +24,8 @@ import {
 
 import { useForm } from "react-hook-form";
 import { ConstructionOutlined } from "@mui/icons-material";
+import moment from "moment";
+
 const CancelBooking = () => {
   const {
     register,
@@ -33,24 +36,39 @@ const CancelBooking = () => {
   const [showdate, setShowdate] = useState(false);
   const [value, setValue] = useState([new Date(), new Date()]);
   const [custom, setCustom] = useState(false);
-  const onSubmit = (data) => console.log(data);
+
   const [costcenters, setCostcenters] = useState([]);
   const [tableData, setTableData] = useState(null);
 
+  const ref = useRef();
+
+  const costCenterRef = useRef();
+
   useEffect(() => {
     const fn = async () => {
-      const rescost = await Costcenters();
-      setCostcenters(rescost);
+      // const rescost = await Costcenters();
+      setCostcenters(JSON.parse(localStorage.getItem("costcenters")));
     };
     fn();
   }, []);
 
   const handleDate = () => {
-    setShowdate(true);
+    showdate ? setShowdate(false) : setShowdate(true);
   };
 
   const handleHideDate = () => {
     setShowdate(false);
+  };
+
+  useVisible(ref, () => {
+    setShowdate(false);
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log(costCenterRef.current.value)
+    console.log(value[0])
+    console.log(value[1])
   };
 
   return (
@@ -71,13 +89,16 @@ const CancelBooking = () => {
                   <label className="label">
                     Date Range <span className="text-[#FF0000]">*</span>
                   </label>
-                  <div className="flex-1 ">
+                  <div className="flex-1 " ref={ref}>
                     <input
                       type="text"
                       className="input text-[#464E5F] text-sm w-full"
                       {...register("fromDate", { required: true })}
-                      onFocus={handleDate}
-                      onBlur={handleHideDate}
+                      onClick={handleDate}
+                      value={`
+                        ${moment(value[0]).format("L")} 
+                        -
+                        ${moment(value[1]).format("L")}`}
                     ></input>
                     {showdate && (
                       <div className="border-l-2 absolute">
@@ -101,7 +122,7 @@ const CancelBooking = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex-1 flex items-center gap-4 w-full">
+                {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     From Consignement Number
                     <span className="text-[#FF0000]">*</span>
@@ -118,7 +139,7 @@ const CancelBooking = () => {
                       </span>
                     )}
                   </div>
-                </div>
+                </div> */}
                 {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     Cost Center <span className="text-[#FF0000]">*</span>
@@ -156,6 +177,7 @@ const CancelBooking = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("costCenter", { required: true })}
+                    ref={costCenterRef}
                   >
                     {costcenters &&
                       costcenters.map((costcenter) => (
@@ -167,7 +189,7 @@ const CancelBooking = () => {
                       ))}
                   </select>
                 </div>
-                <div className="flex-1 flex items-center gap-3 w-full">
+                {/* <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label">
                     To Consignement Number{" "}
                     <span className="text-[#FF0000]">*</span>
@@ -184,7 +206,7 @@ const CancelBooking = () => {
                       </span>
                     )}
                   </div>
-                </div>
+                </div> */}
 
                 {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
@@ -228,7 +250,7 @@ const CancelBooking = () => {
             <Card heading="Load Sheet Data">
               <div className="flex gap-6 overflow-auto">
                 <div className="flex-1 flex flex-col gap-3 ">
-                  <LoadsheetTable tableData={tableData} />
+                  <data tableData={tableData} />
                 </div>
               </div>
             </Card>
