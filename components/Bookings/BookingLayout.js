@@ -14,6 +14,9 @@ const BookingLayout = () => {
 
   useEffect(() => {
     switch (pathname) {
+      case "/booking/bulk-import":
+        setName("Bulk Import");
+        break;
       case "/booking/single-booking":
         setName("Single Booking");
         break;
