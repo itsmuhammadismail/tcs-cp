@@ -23,13 +23,17 @@ const SingleBookingDropdown = ({ showDropdown, setShowDropdown, name }) => {
           className="absolute top-[3rem] right-0 bg-white  rounded-2xl z-[100] flex overflow-hidden text-xs"
         >
           <ul className="my-4 w-[11rem]">
-            <li
-              className={`px-4 py-2 hover:bg-[#F3F6F9] ${
-                name === "Bulk Import" && "bg-[#F3F6F9]"
-              }`}
-            >
-              Bulk Import
-            </li>
+            <Link href="/booking/bulk-import">
+              <a>
+                <li
+                  className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                    name === "Bulk Import" && "bg-[#F3F6F9]"
+                  }`}
+                >
+                  Bulk Import
+                </li>
+              </a>
+            </Link>
             <Link href="/booking/single-booking">
               <a>
                 <li

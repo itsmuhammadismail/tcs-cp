@@ -32,11 +32,15 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const Bookings = () => {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(
+    JSON.parse(localStorage.getItem("countries"))
+  );
   const [cities, setCities] = useRecoilState(citiesState);
   const [pkCities, setPkCities] = useState([]);
   // const [costcenters, setCostcenters] = useRecoilState(costcentersState);
-  const [costcenters, setCostcenters] = useState(null);
+  const [costcenters, setCostcenters] = useState(
+    JSON.parse(localStorage.getItem("costcenters"))
+  );
   const [expressCenter, setExpressCenter] = useState(null);
   const [services, setServices] = useRecoilState(servicesState);
   const [showExpCenter, setShowExpCenter] = useState(true);
@@ -75,6 +79,7 @@ const Bookings = () => {
     if (countries.length === 0) {
       setCountries(JSON.parse(localStorage.getItem("countries")));
       cont = JSON.parse(localStorage.getItem("countries"));
+      console.log(cont);
     }
     const res = await Cities(1);
     setCities(res);
@@ -134,9 +139,6 @@ const Bookings = () => {
   const handleCostcenter = async (e) => {
     const resservice = await Services(e.target.value);
     setServices(resservice);
-    for (let cc of costcenters) {
-      console.log("cc", cc);
-    }
   };
 
   const [boxAvailability, setBoxAvailability] = useState("yes");
@@ -339,11 +341,12 @@ const Bookings = () => {
                     onChange={handleCountry}
                     ref={countryRef}
                   >
-                    {countries.map((country) => (
-                      <option key={country.id} value={country.id}>
-                        {country.country_name}
-                      </option>
-                    ))}
+                    {countries &&
+                      countries.map((country) => (
+                        <option key={country.id} value={country.id}>
+                          {country.country_name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="flex-1 flex items-center gap-4 w-full">
