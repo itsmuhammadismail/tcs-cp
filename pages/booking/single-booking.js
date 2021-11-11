@@ -32,15 +32,11 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const Bookings = () => {
-  const [countries, setCountries] = useState(
-    JSON.parse(localStorage.getItem("countries"))
-  );
+  const [countries, setCountries] = useState([]);
+  const [costcenters, setCostcenters] = useState([]);
   const [cities, setCities] = useRecoilState(citiesState);
   const [pkCities, setPkCities] = useState([]);
-  // const [costcenters, setCostcenters] = useRecoilState(costcentersState);
-  const [costcenters, setCostcenters] = useState(
-    JSON.parse(localStorage.getItem("costcenters"))
-  );
+
   const [expressCenter, setExpressCenter] = useState(null);
   const [services, setServices] = useRecoilState(servicesState);
   const [showExpCenter, setShowExpCenter] = useState(true);
@@ -74,43 +70,46 @@ const Bookings = () => {
     formState: { errors },
   } = useForm();
 
-  useEffect(async () => {
-    let cont = [];
-    if (countries.length === 0) {
+  useEffect(() => {
+    const fn = async () => {
+      let cont = [];
+
       setCountries(JSON.parse(localStorage.getItem("countries")));
       cont = JSON.parse(localStorage.getItem("countries"));
-      console.log(cont);
-    }
-    const res = await Cities(1);
-    setCities(res);
-    setPkCities(res);
-    const rescost = await Costcenters();
-    setCostcenters(rescost);
-    contactNumberRef.current.value = rescost[0].phone_number;
-    customerEmail.current.value = rescost[0].email;
-    customerAddress.current.value = rescost[0].pickup_address;
+      setCostcenters(JSON.parse(localStorage.getItem("costcenters")));
+      const res = await Cities(1);
+      setCities(res);
+      setPkCities(res);
+      const rescost = await Costcenters();
+      setCostcenters(rescost);
+      contactNumberRef.current.value = rescost[0].phone_number;
+      customerEmail.current.value = rescost[0].email;
+      customerAddress.current.value = rescost[0].pickup_address;
 
-    const resservice = await Services(21);
-    setServices(resservice);
-    const resExp = await ExpressCenter(res[0].city_code);
+      const resservice = await Services(21);
+      setServices(resservice);
+      const resExp = await ExpressCenter(res[0].city_code);
 
-    setExpressCenter(resExp["items"]);
-    if (resExp["items"][0] !== undefined)
-      consigneeAddress.current.value = resExp["items"][0].address;
+      setExpressCenter(resExp["items"]);
+      if (resExp["items"][0] !== undefined)
+        consigneeAddress.current.value = resExp["items"][0].address;
 
-    let originCountry = rescost[0].fk_country;
-    let originCity = rescost[0].fk_city;
+      let originCountry = rescost[0].fk_country;
+      let originCity = rescost[0].fk_city;
 
-    for (let country of cont) {
-      let theCities = await Cities(originCountry);
-      if (country.id == originCountry) {
-        for (let city of theCities) {
-          if (city.id == originCity) {
-            origin.current.value = city.city_code;
+      // let theCities = await Cities(originCountry);
+      let theCities = JSON.parse(localStorage.getItem("pkcities"));
+      for (let country of cont) {
+        if (country.id == originCountry) {
+          for (let city of theCities) {
+            if (city.id == originCity) {
+              origin.current.value = city.city_code;
+            }
           }
         }
       }
-    }
+    };
+    fn();
   }, []);
 
   const handleCountry = async (e) => {
@@ -139,6 +138,14 @@ const Bookings = () => {
   const handleCostcenter = async (e) => {
     const resservice = await Services(e.target.value);
     setServices(resservice);
+    for (let cc of costcenters) {
+      if (cc.id === +e.target.value) {
+        console.log(cc.fk_city);
+        let city = pkCities.filter((c) => +c.id == +cc.fk_city);
+        console.log(city[0], "city");
+        origin.current.value = city[0].city_code;
+      }
+    }
   };
 
   const [boxAvailability, setBoxAvailability] = useState("yes");
@@ -785,10 +792,7 @@ Bookings.getInitialProps = async ({ req, res }) => {
   const data = parseCookies(req);
 
   if (res) {
-    if (
-      (Object.keys(data).length === 0 && data.constructor === Object) ||
-      Object(data).token === "undefined"
-    ) {
+    if (Object.keys(data).length === 0 && data.constructor === Object) {
       res.writeHead(301, { Location: "/" });
       res.end();
     }
