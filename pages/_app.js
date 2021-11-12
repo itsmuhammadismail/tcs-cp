@@ -8,10 +8,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
       <CookiesProvider>
-        <>
-          
-          <Component {...pageProps} />
-        </>
+        <Component {...pageProps} />
       </CookiesProvider>
     </RecoilRoot>
   );

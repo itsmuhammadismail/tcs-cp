@@ -9,11 +9,33 @@ import Orders from "../components/Orders";
 import Payment from "../components/Payment";
 import Countries from "../api/countries";
 import { parseCookies } from "../helpers/";
+import moment from "moment";
 
 export default function Home() {
   const [dateDropdown, setDateDropdown] = useState(false);
+  const [dateValue, setDateValue] = useState(
+    `Today ${moment().format("MMM, DD")}`
+  );
+  const [selected, setSelected] = useState("today");
+
   const handleDateDropdown = () => {
     dateDropdown ? setDateDropdown(false) : setDateDropdown(true);
+  };
+
+  const handleSelected = (name) => {
+    setSelected(name);
+    if (name === "today") setDateValue(`Today ${moment().format("MMM, DD")}`);
+    else if (name === "yesterday")
+      setDateValue(
+        `Yesterday ${moment(new Date(Date.now() - 24 * 60 * 60 * 1000)).format(
+          "MMM, DD"
+        )}`
+      );
+    else if (name === "last 7 days") setDateValue("Last 7 Days");
+    else if (name === "last 30 days") setDateValue("Last 30 Days");
+    else if (name === "this month") setDateValue("This Month");
+    else if (name === "last month") setDateValue("Last Month");
+    else setDateValue(name);
   };
 
   useEffect(async () => await Countries(), []);
@@ -30,7 +52,7 @@ export default function Home() {
           <h1 className="font-semibold text-lg">Dashboard</h1>
           <div className="relative flex ">
             <Button2
-              text="Today Sep, 15"
+              text={dateValue}
               icon="/icons/calender.svg"
               rightIcon="/icons/down.svg"
               width="11rem"
@@ -41,6 +63,8 @@ export default function Home() {
             <DateDropdown
               showDropdown={dateDropdown}
               setShowDropdown={handleDateDropdown}
+              selected={selected}
+              handleSelected={handleSelected}
             />
           </div>
         </div>

@@ -50,6 +50,56 @@
   font-style: normal;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #ececec;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 8px;
+  background-color: #B5B5C3;
+  /* border-radius: 6px; */
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+  height: 8px;
+  background-color: #a1a1ad;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  height: 8px;
+  background-color: #B5B5C3;
+  /* border-radius: 6px; */
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+  height: 8px;
+  background-color: #a1a1ad;
+}
+
+::-moz-vertical-scrollbar {
+  width: 8px;
+  height: 15px;
+}
+
+::-moz-vertical-scrollbar-track-piece {
+  background-color: #ccc;
+}
+
+::-moz-vertical-scrollbar-thumb:vertical {
+  height: 8px;
+  background-color: #a1a1ad;
+}
+
+::-moz-vertical-scrollbar-thumb:horizontal {
+  height: 8px;
+  background-color: #a1a1ad;
+}
+
 html,
 body {
   padding: 0;
