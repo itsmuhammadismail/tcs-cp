@@ -113,7 +113,7 @@ const CancelBooking = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex-1 flex items-center gap-4 w-full">
+                {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     From Consignement Number
                     <span className="text-[#FF0000]">*</span>
@@ -130,7 +130,7 @@ const CancelBooking = () => {
                       </span>
                     )}
                   </div>
-                </div>
+                </div> */}
                 {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label">
                     Cost Center <span className="text-[#FF0000]">*</span>
@@ -179,7 +179,7 @@ const CancelBooking = () => {
                       ))}
                   </select>
                 </div>
-                <div className="flex-1 flex items-center gap-3 w-full">
+                {/* <div className="flex-1 flex items-center gap-3 w-full">
                   <label className="label">
                     To Consignement Number{" "}
                     <span className="text-[#FF0000]">*</span>
@@ -196,7 +196,7 @@ const CancelBooking = () => {
                       </span>
                     )}
                   </div>
-                </div>
+                </div> */}
 
                 {/* <div className="flex-1 flex items-center gap-4 w-full">
                   <label className="label2">
