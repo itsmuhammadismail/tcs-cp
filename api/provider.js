@@ -54,7 +54,7 @@ export class Providers {
      * @returns 
      */
    async callApiPost(endPoint, params) {
-    return await this.post(`${this.BASEURL}/${endPoint}`, params);
+    return await this.post(`${this.BASEURL}/${endPoint}/`, params);
    }
 
    /**

@@ -10,6 +10,7 @@ import { useEffect, useState, useRef } from "react";
 import Cities from "../../api/cities";
 import { Providers } from "./../../api/provider";
 import { ExcelRenderer, OutTable } from "react-excel-renderer";
+import {API_END_POINTS} from './../../_common/constants';
 import { uploadFileValidations, groupedData, 
   getLocalStorage, 
   getCurrentOrigin, 
@@ -27,7 +28,7 @@ const BulkImport = () => {
     
   } = useForm();
 
-  const dataLimit = 2;
+  const dataLimit = 1;
   
   const costcenterRef = useRef();
   const origin = useRef();
@@ -84,6 +85,12 @@ const BulkImport = () => {
 
         const dataGrouped =  groupedData(csvRow, dataLimit);
         console.log(dataGrouped);
+        // dataGrouped.map(async (data) => {
+            // data[0]
+            const obj = {...dataGrouped[0]};
+            const callBooking = await new Providers().callApiPost(API_END_POINTS.POST_BOOKINGS, obj[0]);
+            console.log(callBooking, obj);
+        // });
 
       }
     });
@@ -98,18 +105,18 @@ const BulkImport = () => {
       "consignee_email": data[3],
       "pieces": data[5],
       "weight": data[6],
-      "is_box": true,
+      "is_box": false,
       "height": 0,
       "width": 0,
       "length": 0,
       "fk_service": data[10],
-      "origin_country": countryData.country_name,
+      "origin_country": countryData.country_code,
       "origin_city": originCity,
       "destination_city": data[4],
-      "destination_country": "string",
+      "destination_country": countryData.country_code,
       "remarks": data[12],
-      "is_fragile": true,
-      "is_insurance": true,
+      "is_fragile": false,
+      "is_insurance": false,
       "insurance_value": data[13],
       "product_detail": data[11],
       "cod_amount": data[7],
@@ -119,24 +126,24 @@ const BulkImport = () => {
     }
   }
 
-  const uploadObject = (data) => {
-    return {
-      consigneeName: data[0],
-      consigneeAddress: data[1],
-      consigneeMobile: data[2],
-      consigneeEmail: data[3],
-      destinationCity: data[4],
-      pieces: data[5],
-      weight: data[6],
-      codamount: data[7],
-      referenceNumber: data[8],
-      specialHandling: data[9],
-      serviceType: data[10],
-      productDetails: data[11],
-      remarks: data[12],
-      insurance: data[13],
-    };
-  };
+  // const uploadObject = (data) => {
+  //   return {
+  //     consigneeName: data[0],
+  //     consigneeAddress: data[1],
+  //     consigneeMobile: data[2],
+  //     consigneeEmail: data[3],
+  //     destinationCity: data[4],
+  //     pieces: data[5],
+  //     weight: data[6],
+  //     codamount: data[7],
+  //     referenceNumber: data[8],
+  //     specialHandling: data[9],
+  //     serviceType: data[10],
+  //     productDetails: data[11],
+  //     remarks: data[12],
+  //     insurance: data[13],
+  //   };
+  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

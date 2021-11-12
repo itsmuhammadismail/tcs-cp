@@ -13,3 +13,5 @@ const API_END_POINTS = {
     POST_LOADSHEET_CONSIGNMENT: 'loadsheetconsigment',
     POST_SERVICES: 'services',
 }
+
+export {API_END_POINTS}
