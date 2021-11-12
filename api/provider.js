@@ -43,8 +43,58 @@ export class Providers {
         return axios.put(url, {...this.token}).then((res)=> res).catch((error)=> {console.error(error)});
     }
 
-   async getOrigin(id) {
-    return await this.get(`${this.BASEURL}/costcenters/${id}/`);
+    async patch(url) {
+        return axios.patch(url, {...this.token}).then((res)=> res).catch((error)=> {console.error(error)});
+    }
+
+    /**
+     * 
+     * @param {*} endPoint 
+     * @param {*} params 
+     * @returns 
+     */
+   async callApiPost(endPoint, params) {
+    return await this.post(`${this.BASEURL}/${endPoint}`, params);
    }
 
+   /**
+    * 
+    * @param {*} endpoint 
+    * @returns 
+    */
+   async callApiGet(endpoint) {
+    return await this.get(`${this.BASEURL}/${endpoint}`);
+   }
+
+   /**
+    * 
+    * @param {*} endpoint 
+    * @param {*} id 
+    * @returns 
+    */
+   async callApiGetById(endpoint, id) {
+    return await this.get(`${this.BASEURL}/${endpoint}/${id}`);
+   }
+
+   /**
+    * 
+    * @param {*} endpoint 
+    * @param {*} id 
+    * @returns 
+    */
+   async callApiPut(endpoint, id) {
+    return await this.put(`${this.BASEURL}/${endpoint}/${id}`);
+   }
+
+   /**
+    * 
+    * @param {*} endpoint 
+    * @param {*} id 
+    * @returns 
+    */
+   async callApiPatch(endpoint, id) {
+    return await this.patch(`${this.BASEURL}/${endpoint}/${id}`);
+   }
+
+   
 }
