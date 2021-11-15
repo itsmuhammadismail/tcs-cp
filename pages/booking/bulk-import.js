@@ -11,6 +11,7 @@ import Cities from "../../api/cities";
 import { Providers } from "./../../api/provider";
 import { ExcelRenderer, OutTable } from "react-excel-renderer";
 import { uploadFileValidations } from "../../_common/common-methods";
+import BulkTables from "../../components/BulkTables";
 
 const BulkImport = () => {
   const [costcenters, setCostcenters] = useState(null);
@@ -229,6 +230,11 @@ const BulkImport = () => {
                 issues are primary reasons of return shipments.
               </p>
             </div>
+          </Card>
+        </div>
+        <div className="media mx-auto p-4 flex gap-6">
+          <Card heading="Booking by CSV File">
+            <BulkTables />
           </Card>
         </div>
       </Layout>

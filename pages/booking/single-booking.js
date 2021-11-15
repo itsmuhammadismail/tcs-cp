@@ -238,7 +238,7 @@ const Bookings = () => {
           {/* Consignee Start */}
           <Card heading="Consignee Infromation">
             <div className="flex flex-col items-center gap-3">
-              <div className="flex-1 flex items-center gap-4 w-full">
+              {/* <div className="flex-1 flex items-center gap-4 w-full">
                 <label className="label">Consignment Note #</label>
                 <div className="flex-1 flex items-center justify-center">
                   <input
@@ -250,7 +250,7 @@ const Bookings = () => {
                     <img src="/icons/search2.svg" alt="" className="h-4" />
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="flex-1 flex items-center gap-4 w-full">
                 <label className="label">
                   Cost Center <span className="text-[#FF0000]">*</span>
@@ -450,7 +450,7 @@ const Bookings = () => {
                 <div className="flex flex-col flex-1">
                   <textarea
                     type="text"
-                    className="input2 flex-1"
+                    className="input2 flex-1 resize-none"
                     {...register("address")}
                     ref={consigneeAddress}
                     disabled
