@@ -47,4 +47,8 @@ export class Providers {
     return await this.get(`${this.BASEURL}/costcenters/${id}/`);
    }
 
+   async fetchCancelBooking(payload){
+    return await this.post(`${this.BASEURL}/bookingreport/`,payload);
+   }
+
 }

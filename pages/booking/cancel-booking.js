@@ -10,8 +10,9 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Costcenters from "../../api/costcenters";
 import { costcentersState } from "../../recoil/atoms";
-import LoadsheetTable from "../../components/LoadsheetTable";
+import CancelBookingTable from "../../components/CancelBookingTable";
 import useVisible from "../../hooks/useVisible";
+import { Providers } from "../../api/provider";
 
 import {
   FormControl,
@@ -36,11 +37,12 @@ const CancelBooking = () => {
   const [showdate, setShowdate] = useState(false);
   const [value, setValue] = useState([new Date(), new Date()]);
   const [custom, setCustom] = useState(false);
-  const onSubmit = (data) => console.log(data);
   const [costcenters, setCostcenters] = useState([]);
   const [tableData, setTableData] = useState(null);
 
   const ref = useRef();
+
+  const costCenterRef = useRef();
 
   useEffect(() => {
     const fn = async () => {
@@ -61,6 +63,20 @@ const CancelBooking = () => {
   useVisible(ref, () => {
     setShowdate(false);
   });
+
+  const onSubmit = async (data) => {
+    const splitDate  = data.fromDate.split('-');
+    const trimFromDate = splitDate['0'].trim();
+    const trimToDate = splitDate['1'].trim();
+
+    const payload = {
+      "from_date": moment(trimFromDate).format('YYYY-MM-DD'),
+      "to_date": moment(trimToDate).format('YYYY-MM-DD'),
+      "fk_cost_center": data.costCenter
+    }
+    const response = await new Providers().fetchCancelBooking(payload);
+  }
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -122,7 +138,7 @@ const CancelBooking = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("fromConsignmentNumber", { required: true })}
+                      {...register("fromConsignmentNumber", { required: false })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -138,7 +154,7 @@ const CancelBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("costCenter", { required: true })}
+                    {...register("costCenter", { required: false })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -168,6 +184,7 @@ const CancelBooking = () => {
                     type="text"
                     className="input text-[#464E5F] text-sm"
                     {...register("costCenter", { required: true })}
+                    ref={costCenterRef}
                   >
                     {costcenters &&
                       costcenters.map((costcenter) => (
@@ -188,7 +205,7 @@ const CancelBooking = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("toConsignmentNumber", { required: true })}
+                      {...register("toConsignmentNumber", { required: false })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -240,7 +257,7 @@ const CancelBooking = () => {
             <Card heading="Load Sheet Data">
               <div className="flex gap-6 overflow-auto">
                 <div className="flex-1 flex flex-col gap-3 ">
-                  <LoadsheetTable tableData={tableData} />
+                  <data tableData={tableData} />
                 </div>
               </div>
             </Card>
