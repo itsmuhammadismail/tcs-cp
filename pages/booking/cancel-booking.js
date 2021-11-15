@@ -39,7 +39,7 @@ const CancelBooking = () => {
   const [custom, setCustom] = useState(false);
   const [costcenters, setCostcenters] = useState([]);
   const [tableData, setTableData] = useState(null);
-
+  const [bookingData, setBookingData] = useState(null);
   const ref = useRef();
 
   const costCenterRef = useRef();
@@ -65,7 +65,6 @@ const CancelBooking = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("submit");
     const splitDate = data.fromDate.split("-");
     const trimFromDate = splitDate["0"].trim();
     const trimToDate = splitDate["1"].trim();
@@ -76,9 +75,13 @@ const CancelBooking = () => {
       fk_cost_center: costCenterRef.current.value,
     };
     const response = await new Providers().fetchCancelBooking(payload);
+    if(response.data){
+      setBookingData(response.data);
+    }
   };
 
   return (
+    <div>
     <form onSubmit={handleSubmit(onSubmit)}>
       <Head>
         <title>One Booking</title>
@@ -264,6 +267,8 @@ const CancelBooking = () => {
         )}
       </Layout>
     </form>
+    <CancelBookingTable bookingData={bookingData} /> 
+    </div>
   );
 };
 
