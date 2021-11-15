@@ -111,7 +111,7 @@ const SingleBookingDropdown = ({ showDropdown, setShowDropdown, name }) => {
                 </li>
               </a>
             </Link>
-            <Link href="/booking/reprint-cn">
+            <Link href="/booking/create-return">
               <a>
                 <li
                   className={`px-4 py-2 hover:bg-[#F3F6F9] ${
