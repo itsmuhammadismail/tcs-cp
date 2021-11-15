@@ -27,7 +27,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 
-const GloadSheet = () => {
+const GenerateloadSheet = () => {
   const [costcenters, setCostcenters] = useState([]);
   const [cities, setCities] = useRecoilState(citiesState);
   const [loadsheetdates, setLoadsheetdate] = useRecoilState(loadsheetdateState);
@@ -263,16 +263,14 @@ const GloadSheet = () => {
   );
 };
 
-export default GloadSheet;
+export default GenerateloadSheet;
 
-GloadSheet.getInitialProps = async ({ req, res }) => {
+
+GenerateloadSheet.getInitialProps = async ({ req, res }) => {
   const data = parseCookies(req);
 
   if (res) {
-    if (
-      (Object.keys(data).length === 0 && data.constructor === Object) ||
-      Object(data).token === "undefined"
-    ) {
+    if (Object.keys(data).length === 0 && data.constructor === Object) {
       res.writeHead(301, { Location: "/" });
       res.end();
     }
@@ -282,3 +280,4 @@ GloadSheet.getInitialProps = async ({ req, res }) => {
     data: data && data,
   };
 };
+
