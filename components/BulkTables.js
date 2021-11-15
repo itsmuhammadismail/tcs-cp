@@ -5,22 +5,24 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import Tab from "react-bootstrap/Tab";
 import Failed from "./Tables/Bulk/Failed";
+import Uploaded from "./Tables/Bulk/Uploaded";
+import Success from "./Tables/Bulk/Success";
 
 const BulkTables = () => {
   return (
     <div className="">
       <Tabs
-        defaultActiveKey="profile"
+        defaultActiveKey="uploaded"
         id="uncontrolled-tab-example"
         className="mb-3"
       >
-        <Tab eventKey="home" title="Home">
-          Hello 1
+        <Tab eventKey="uploaded" title="Uploaded">
+          <Uploaded/>
         </Tab>
-        <Tab eventKey="profile" title="Profile">
-          Hello 2
+        <Tab eventKey="success" title="Success">
+          <Success/>
         </Tab>
-        <Tab eventKey="contact" title="Contact">
+        <Tab eventKey="failed" title="Failed">
           <Failed />
         </Tab>
       </Tabs>

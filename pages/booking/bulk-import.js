@@ -232,11 +232,13 @@ const BulkImport = () => {
             </div>
           </Card>
         </div>
-        <div className="media mx-auto p-4 flex gap-6">
-          <Card heading="Booking by CSV File">
-            <BulkTables />
-          </Card>
-        </div>
+        {true && (
+          <div className="media mx-auto p-4 flex gap-6">
+            <Card>
+              <BulkTables />
+            </Card>
+          </div>
+        )}
       </Layout>
     </form>
   );

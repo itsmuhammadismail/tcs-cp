@@ -71,7 +71,7 @@
 }
 ::-webkit-scrollbar-thumb:vertical {
   height: 8px;
-  background-color: #B5B5C3;
+  background-color: #b5b5c3;
   /* border-radius: 6px; */
 }
 ::-webkit-scrollbar-thumb:vertical:hover {
@@ -80,7 +80,7 @@
 }
 ::-webkit-scrollbar-thumb:horizontal {
   height: 8px;
-  background-color: #B5B5C3;
+  background-color: #b5b5c3;
   /* border-radius: 6px; */
 }
 ::-webkit-scrollbar-thumb:horizontal:hover {
@@ -278,4 +278,18 @@ a {
   margin-top: 50px;
   padding: 10px;
   margin: 10px;
+}
+
+// Material Table
+.MuiTableRow-root:nth-child(even) {
+  background-color: #cfcfcf !important;
+}
+.MuiTableRow-head {
+  background-color: #979797 !important;
+}
+.MuiTableCell-root {
+  border: 1px solid rgb(165, 165, 165) !important;
+}
+.MuiTableCell-body {
+  font-size: 0.7rem !important;
 }
