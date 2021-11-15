@@ -65,18 +65,18 @@ const CancelBooking = () => {
   });
 
   const onSubmit = async (data) => {
-    const splitDate  = data.fromDate.split('-');
-    const trimFromDate = splitDate['0'].trim();
-    const trimToDate = splitDate['1'].trim();
+    console.log("submit");
+    const splitDate = data.fromDate.split("-");
+    const trimFromDate = splitDate["0"].trim();
+    const trimToDate = splitDate["1"].trim();
 
     const payload = {
-      "from_date": moment(trimFromDate).format('YYYY-MM-DD'),
-      "to_date": moment(trimToDate).format('YYYY-MM-DD'),
-      "fk_cost_center": data.costCenter
-    }
+      from_date: moment(trimFromDate).format("YYYY-MM-DD"),
+      to_date: moment(trimToDate).format("YYYY-MM-DD"),
+      fk_cost_center: costCenterRef.current.value,
+    };
     const response = await new Providers().fetchCancelBooking(payload);
-  }
-
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -101,11 +101,11 @@ const CancelBooking = () => {
                       type="text"
                       className="input text-[#464E5F] text-sm w-full"
                       {...register("fromDate", { required: true })}
+                      defaultValue={`
+                      ${moment(value[0]).format("L")} 
+                      -
+                      ${moment(value[1]).format("L")}`}
                       onClick={handleDate}
-                      value={`
-                        ${moment(value[0]).format("L")} 
-                        -
-                        ${moment(value[1]).format("L")}`}
                     ></input>
                     {showdate && (
                       <div className="border-l-2 absolute">
@@ -183,7 +183,7 @@ const CancelBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("costCenter", { required: true })}
+                    // {...register("costCenter", { required: true })}
                     ref={costCenterRef}
                   >
                     {costcenters &&
@@ -248,7 +248,6 @@ const CancelBooking = () => {
             bgColor="#4CAF50"
             color="white"
             width="11rem"
-            type="submit"
           ></Button>
         </div>
         {tableData !== null && (

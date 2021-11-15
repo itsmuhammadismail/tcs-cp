@@ -97,8 +97,9 @@ const Bookings = () => {
       let originCountry = rescost[0].fk_country;
       let originCity = rescost[0].fk_city;
 
+      // let theCities = await Cities(originCountry);
+      let theCities = JSON.parse(localStorage.getItem("pkcities"));
       for (let country of cont) {
-        let theCities = await Cities(originCountry);
         if (country.id == originCountry) {
           for (let city of theCities) {
             if (city.id == originCity) {
@@ -137,6 +138,14 @@ const Bookings = () => {
   const handleCostcenter = async (e) => {
     const resservice = await Services(e.target.value);
     setServices(resservice);
+    for (let cc of costcenters) {
+      if (cc.id === +e.target.value) {
+        console.log(cc.fk_city);
+        let city = pkCities.filter((c) => +c.id == +cc.fk_city);
+        console.log(city[0], "city");
+        origin.current.value = city[0].city_code;
+      }
+    }
   };
 
   const [boxAvailability, setBoxAvailability] = useState("yes");
