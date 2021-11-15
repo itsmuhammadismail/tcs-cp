@@ -19,7 +19,7 @@ export default function Home() {
   const [selected, setSelected] = useState("today");
 
   const handleDateDropdown = () => {
-    dateDropdown ? setDateDropdown(false) : setDateDropdown(true);
+  dateDropdown ? setDateDropdown(false) : setDateDropdown(true);
   };
 
   const handleSelected = (name) => {
