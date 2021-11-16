@@ -33,7 +33,7 @@ const Header = () => {
             className="h-6 mr-[2rem] 2xl:absolute left-[1rem]"
             onClick={showDrawer}
           />
-          <Link href="/">
+          <Link href="/dashboard">
             <a>
               <img src="/logo.svg" alt="" className="h-8" />
             </a>

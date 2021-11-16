@@ -14,10 +14,12 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import { useCookies } from "react-cookie";
 
 const App = ({ visible, setVisible }) => {
   const [placement, setPlacement] = useState("left");
   const [open, setOpen] = useState(false);
+  const [cookie, removeCookie] = useCookies(["token"]);
 
   const onClose = () => {
     setVisible(false);
@@ -25,6 +27,11 @@ const App = ({ visible, setVisible }) => {
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const logout = () => {
+    removeCookie("token");
+    window.location.href = "/";
   };
 
   return (
@@ -48,7 +55,7 @@ const App = ({ visible, setVisible }) => {
             >
               <ListItemButton>
                 <ListItemIcon>
-                  <img src="/drawer/dashboard.svg" alt="" className="" />
+                  <img src="/drawer/dashboard.svg" alt="" className="h-[1.3rem]" />
                 </ListItemIcon>
                 <ListItemText className="text-sm" primary="Dashboard" />
               </ListItemButton>
@@ -89,13 +96,13 @@ const App = ({ visible, setVisible }) => {
               </Collapse>
             </List>
           </div>
-          <div className="drawer-logout">
+          <div className="drawer-logout" onClick={logout}>
             <List>
               <ListItemButton>
                 <ListItemIcon>
                   <img src="/drawer/logout.svg" alt="" className="" />
                 </ListItemIcon>
-                <ListItemText primary="Logout" />
+                <ListItemText primary="Sign Out" />
               </ListItemButton>
             </List>
           </div>

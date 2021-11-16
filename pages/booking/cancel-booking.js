@@ -12,6 +12,7 @@ import Costcenters from "../../api/costcenters";
 import { costcentersState } from "../../recoil/atoms";
 import CancelBookingTable from "../../components/CancelBookingTable";
 import useVisible from "../../hooks/useVisible";
+import { Providers } from "../../api/provider";
 
 import {
   FormControl,
@@ -36,7 +37,6 @@ const CancelBooking = () => {
   const [showdate, setShowdate] = useState(false);
   const [value, setValue] = useState([new Date(), new Date()]);
   const [custom, setCustom] = useState(false);
-
   const [costcenters, setCostcenters] = useState([]);
   const [tableData, setTableData] = useState(null);
 
@@ -64,11 +64,18 @@ const CancelBooking = () => {
     setShowdate(false);
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(costCenterRef.current.value)
-    console.log(value[0])
-    console.log(value[1])
+  const onSubmit = async (data) => {
+    console.log("submit");
+    const splitDate = data.fromDate.split("-");
+    const trimFromDate = splitDate["0"].trim();
+    const trimToDate = splitDate["1"].trim();
+
+    const payload = {
+      from_date: moment(trimFromDate).format("YYYY-MM-DD"),
+      to_date: moment(trimToDate).format("YYYY-MM-DD"),
+      fk_cost_center: costCenterRef.current.value,
+    };
+    const response = await new Providers().fetchCancelBooking(payload);
   };
 
   return (
@@ -94,11 +101,11 @@ const CancelBooking = () => {
                       type="text"
                       className="input text-[#464E5F] text-sm w-full"
                       {...register("fromDate", { required: true })}
+                      defaultValue={`
+                      ${moment(value[0]).format("L")} 
+                      -
+                      ${moment(value[1]).format("L")}`}
                       onClick={handleDate}
-                      value={`
-                        ${moment(value[0]).format("L")} 
-                        -
-                        ${moment(value[1]).format("L")}`}
                     ></input>
                     {showdate && (
                       <div className="border-l-2 absolute">
@@ -131,7 +138,7 @@ const CancelBooking = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("fromConsignmentNumber", { required: true })}
+                      {...register("fromConsignmentNumber", { required: false })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -147,7 +154,7 @@ const CancelBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("costCenter", { required: true })}
+                    {...register("costCenter", { required: false })}
                   >
                     <option value="Please Select">Please Select</option>
                   </select>
@@ -176,7 +183,7 @@ const CancelBooking = () => {
                   <select
                     type="text"
                     className="input text-[#464E5F] text-sm"
-                    {...register("costCenter", { required: true })}
+                    // {...register("costCenter", { required: true })}
                     ref={costCenterRef}
                   >
                     {costcenters &&
@@ -198,7 +205,7 @@ const CancelBooking = () => {
                     <input
                       type="number"
                       className="input text-[#464E5F] text-sm flex-1"
-                      {...register("toConsignmentNumber", { required: true })}
+                      {...register("toConsignmentNumber", { required: false })}
                     ></input>
                     {errors.height && (
                       <span className="requiredField">
@@ -241,7 +248,6 @@ const CancelBooking = () => {
             bgColor="#4CAF50"
             color="white"
             width="11rem"
-            type="submit"
           ></Button>
         </div>
         {tableData !== null && (
@@ -263,14 +269,12 @@ const CancelBooking = () => {
 
 export default CancelBooking;
 
+
 CancelBooking.getInitialProps = async ({ req, res }) => {
   const data = parseCookies(req);
 
   if (res) {
-    if (
-      (Object.keys(data).length === 0 && data.constructor === Object) ||
-      Object(data).token === "undefined"
-    ) {
+    if (Object.keys(data).length === 0 && data.constructor === Object) {
       res.writeHead(301, { Location: "/" });
       res.end();
     }

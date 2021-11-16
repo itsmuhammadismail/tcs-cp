@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import login from "../api/login";
 import { useRouter } from "next/router";
@@ -66,6 +67,11 @@ const Login = () => {
         backgroundSize: "cover",
       }}
     >
+      <Head>
+        <title>One Booking</title>
+        <meta name="description" content="One Booking" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
       <div className="flex-1 flex justify-end items-center w-full">
         <div className="bg-[#F1F4F6] w-[25rem] rounded-md p-[2rem] mr-[10rem]">
           <img src="/logo.svg" alt="" className="h-10" />
