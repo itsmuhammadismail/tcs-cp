@@ -13,6 +13,75 @@ import { ExcelRenderer, OutTable } from "react-excel-renderer";
 import { uploadFileValidations } from "../../_common/common-methods";
 import BulkTables from "../../components/BulkTables";
 
+let idNo = 0;
+
+const createData = (
+  name,
+  address,
+  mobile,
+  email,
+  city,
+  pieces,
+  weight,
+  cod,
+  order,
+  special,
+  service,
+  product,
+  remarks,
+  insurance
+) => ({
+  id: idNo++,
+  name,
+  address,
+  mobile,
+  email,
+  city,
+  pieces,
+  weight,
+  cod,
+  order,
+  special,
+  service,
+  product,
+  remarks,
+  insurance,
+});
+
+const createFailedData = (
+  name,
+  address,
+  mobile,
+  email,
+  city,
+  pieces,
+  weight,
+  cod,
+  order,
+  special,
+  service,
+  product,
+  remarks,
+  insurance
+) => ({
+  id: idNo++,
+  name,
+  address,
+  mobile,
+  email,
+  city,
+  pieces,
+  weight,
+  cod,
+  order,
+  special,
+  service,
+  product,
+  remarks,
+  insurance,
+  isEditMode: false,
+});
+
 const BulkImport = () => {
   const [costcenters, setCostcenters] = useState(null);
   const [pkCities, setPkCities] = useState([]);
@@ -25,6 +94,157 @@ const BulkImport = () => {
 
   const costcenterRef = useRef();
   const origin = useRef();
+
+  const [uploadedRows, setUploadedRows] = useState([
+    createData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+    createData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+    createData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+  ]);
+  const [successRows, setSuccessRows] = useState([
+    createData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+    createData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+    createData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+  ]);
+  const [failedRows, setFailedRows] = useState([
+    createFailedData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+    createFailedData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+    createFailedData(
+      "Muhamamd Ismail",
+      "Korangi no. 5",
+      "03161604575",
+      "ismail.muhammad@tcs.com.pk",
+      "Karachi",
+      2,
+      3,
+      3000,
+      12345,
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+    ),
+  ]);
 
   const handleCostcenter = async (e) => {
     const value = e.target.value;
@@ -235,7 +455,11 @@ const BulkImport = () => {
         {true && (
           <div className="media mx-auto p-4 flex gap-6">
             <Card>
-              <BulkTables />
+              <BulkTables
+                uploadedRows={uploadedRows}
+                successRows={successRows}
+                failedRows={failedRows}
+              />
             </Card>
           </div>
         )}

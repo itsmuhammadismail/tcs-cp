@@ -8,7 +8,7 @@ import Failed from "./Tables/Bulk/Failed";
 import Uploaded from "./Tables/Bulk/Uploaded";
 import Success from "./Tables/Bulk/Success";
 
-const BulkTables = () => {
+const BulkTables = ({uploadedRows, successRows, failedRows}) => {
   return (
     <div className="">
       <Tabs
@@ -17,13 +17,13 @@ const BulkTables = () => {
         className="mb-3"
       >
         <Tab eventKey="uploaded" title="Uploaded">
-          <Uploaded/>
+          <Uploaded rows = {uploadedRows}/>
         </Tab>
         <Tab eventKey="success" title="Success">
-          <Success/>
+          <Success rows = {successRows}/>
         </Tab>
         <Tab eventKey="failed" title="Failed">
-          <Failed />
+          <Failed rows = {failedRows} />
         </Tab>
       </Tabs>
     </div>

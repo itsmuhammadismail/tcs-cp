@@ -22,91 +22,57 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
-let idNo = 0;
 
-const createData = (
-  name,
-  address,
-  mobile,
-  email,
-  city,
-  pieces,
-  weight,
-  cod,
-  order,
-  special,
-  service,
-  product,
-  remarks,
-  insurance
-) => ({
-  id: idNo++,
-  name,
-  address,
-  mobile,
-  email,
-  city,
-  pieces,
-  weight,
-  cod,
-  order,
-  special,
-  service,
-  product,
-  remarks,
-  insurance,
-});
-
-const rows = [
-  createData(
-    "Muhamamd Ismail",
-    "Korangi no. 5",
-    "03161604575",
-    "ismail.muhammad@tcs.com.pk",
-    "Karachi",
-    2,
-    3,
-    3000,
-    12345,
-    "-",
-    "-",
-    "-",
-    "-",
-    "-"
-  ),
-  createData(
-    "Muhamamd Ismail",
-    "Korangi no. 5",
-    "03161604575",
-    "ismail.muhammad@tcs.com.pk",
-    "Karachi",
-    2,
-    3,
-    3000,
-    12345,
-    "-",
-    "-",
-    "-",
-    "-",
-    "-"
-  ),
-  createData(
-    "Muhamamd Ismail",
-    "Korangi no. 5",
-    "03161604575",
-    "ismail.muhammad@tcs.com.pk",
-    "Karachi",
-    2,
-    3,
-    3000,
-    12345,
-    "-",
-    "-",
-    "-",
-    "-",
-    "-"
-  ),
-];
+// const rows = [
+//   createData(
+//     "Muhamamd Ismail",
+//     "Korangi no. 5",
+//     "03161604575",
+//     "ismail.muhammad@tcs.com.pk",
+//     "Karachi",
+//     2,
+//     3,
+//     3000,
+//     12345,
+//     "-",
+//     "-",
+//     "-",
+//     "-",
+//     "-"
+//   ),
+//   createData(
+//     "Muhamamd Ismail",
+//     "Korangi no. 5",
+//     "03161604575",
+//     "ismail.muhammad@tcs.com.pk",
+//     "Karachi",
+//     2,
+//     3,
+//     3000,
+//     12345,
+//     "-",
+//     "-",
+//     "-",
+//     "-",
+//     "-"
+//   ),
+//   createData(
+//     "Muhamamd Ismail",
+//     "Korangi no. 5",
+//     "03161604575",
+//     "ismail.muhammad@tcs.com.pk",
+//     "Karachi",
+//     2,
+//     3,
+//     3000,
+//     12345,
+//     "-",
+//     "-",
+//     "-",
+//     "-",
+//     "-"
+//   ),
+// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -297,7 +263,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable( {rows}) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
