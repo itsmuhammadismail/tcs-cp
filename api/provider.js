@@ -2,7 +2,7 @@ import axios from "axios";
 
 export class Providers {
     
-    BASEURL = "http://uatportal.tcs.com.pk:8000";
+    BASEURL = process.env.NEXT_PUBLIC_BASE_URL || "http://uatportal.tcs.com.pk:8000";
 
     get token() {
     const token = localStorage.getItem("token");

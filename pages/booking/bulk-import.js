@@ -51,6 +51,7 @@ const BulkImport = () => {
   
 
   const  onInt = async () => {
+    console.log(process.env.NEXT_PUBLIC_BASE_URL);
     setCostcenters( getLocalStorage("costcenters"));
     setPkCities(getLocalStorage('pkcities'));
   }

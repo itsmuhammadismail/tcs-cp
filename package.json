@@ -6,7 +6,10 @@
     "dev": "node portal.js",
     "build": "next build",
     "start": "NODE_ENV=production node portal.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "start:development": "env-cmd -f ./env/.env.development node portal.js",
+    "build:qa": "env-cmd -f ./env/.env.qa next build",
+    "build:production": "env-cmd -f ./env/.env.production next build"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -19,6 +22,7 @@
     "antd": "^4.16.13",
     "axios": "^0.22.0",
     "cookie": "^0.4.1",
+    "env-cmd": "^10.1.0",
     "hoist-non-react-statics": "^3.3.2",
     "moment": "^2.29.1",
     "next": "11.1.2",
