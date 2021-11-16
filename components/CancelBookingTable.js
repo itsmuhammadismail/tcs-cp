@@ -22,31 +22,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
-function createData(name, calories, fat, carbs, protein) {
+function createData(consigment_number, consignee_address, created_at, destination_city, destination_country, fk_cost_center, is_fragile, origin_city, pieces, weight) {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    consigment_number,
+    consignee_address,
+    created_at,
+    destination_city,
+    destination_country,
+    fk_cost_center,
+    is_fragile,
+    origin_city,
+    pieces,
+    weight
   };
 }
-
-const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Honeycomb", 408, 3.2, 87, 6.5),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Jelly Bean", 375, 0.0, 94, 0.0),
-  createData("KitKat", 518, 26.0, 65, 7.0),
-  createData("Lollipop", 392, 0.2, 98, 0.0),
-  createData("Marshmallow", 318, 0, 81, 2.0),
-  createData("Nougat", 360, 19.0, 9, 37.0),
-  createData("Oreo", 437, 18.0, 63, 4.0),
-];
+let rows = '';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -80,34 +70,64 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "name",
+    id: "consigment_number",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)",
+    label: "Consigment Number",
   },
   {
-    id: "calories",
+    id: "consignee_address",
     numeric: true,
     disablePadding: false,
-    label: "Calories",
+    label: "Consignee Address",
   },
   {
-    id: "fat",
+    id: "created_at",
     numeric: true,
     disablePadding: false,
-    label: "Fat (g)",
+    label: "created At",
   },
   {
-    id: "carbs",
+    id: "destination_city",
     numeric: true,
     disablePadding: false,
-    label: "Carbs (g)",
+    label: "Destination City",
   },
   {
-    id: "protein",
+    id: "destination_country",
     numeric: true,
     disablePadding: false,
-    label: "Protein (g)",
+    label: "Destination Country",
+  },
+  {
+    id: "fk_cost_center",
+    numeric: true,
+    disablePadding: false,
+    label: "fk_cost_center",
+  },
+  {
+    id: "is_fragile",
+    numeric: true,
+    disablePadding: false,
+    label: "Is fragile",
+  },
+  {
+    id: "origin_city",
+    numeric: true,
+    disablePadding: false,
+    label: "Origin City",
+  },
+  {
+    id: "pieces",
+    numeric: true,
+    disablePadding: false,
+    label: "Pieces",
+  },
+  {
+    id: "weight",
+    numeric: true,
+    disablePadding: false,
+    label: "weight",
   },
 ];
 
@@ -231,14 +251,21 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ bookingData }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [bookingTableData, setBookingTableData] = React.useState(bookingData);
 
+  if (bookingData) {
+    rows = 
+    bookingData.map((data) =>
+      createData(data.consigment_number,data.consignee_address,data.created_at,data.destination_city,data.destination_country,data.fk_cost_center,data.is_fragile,data.origin_city,data.pieces,data.weight) 
+    )
+  }
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -247,19 +274,19 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows.map((n) => n.consigment_number);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, consigment_number) => {
+    const selectedIndex = selected.indexOf(consigment_number);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, consigment_number);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -287,7 +314,7 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (consigment_number) => selected.indexOf(consigment_number) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -317,17 +344,17 @@ export default function EnhancedTable() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.consigment_number);
                   const labelId = `enhanced-table-checkbox-${index}`;
-
+                  {console.log(rows)}
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.consigment_number)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.consigment_number}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -345,12 +372,20 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {row.consigment_number}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.consignee_address}</TableCell>
+                      <TableCell align="right">{row.created_at}</TableCell>
+                      <TableCell align="right">{row.destination_city}</TableCell>
+                      <TableCell align="right">{row.destination_country}</TableCell>
+
+                      <TableCell align="right">{row.fk_cost_center}</TableCell>
+                      <TableCell align="right">{row.is_fragile}</TableCell>
+                      <TableCell align="right">{row.origin_city}</TableCell>
+                      <TableCell align="right">{row.pieces}</TableCell>
+                      <TableCell align="right">{row.weight}</TableCell>
+
+
                     </TableRow>
                   );
                 })}
