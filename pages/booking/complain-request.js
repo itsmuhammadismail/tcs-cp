@@ -197,14 +197,12 @@ const ComplainServiceReq = () => {
  
 export default ComplainServiceReq;
 
+
 ComplainServiceReq.getInitialProps = async ({ req, res }) => {
   const data = parseCookies(req);
 
   if (res) {
-    if (
-      (Object.keys(data).length === 0 && data.constructor === Object) ||
-      Object(data).token === "undefined"
-    ) {
+    if (Object.keys(data).length === 0 && data.constructor === Object) {
       res.writeHead(301, { Location: "/" });
       res.end();
     }

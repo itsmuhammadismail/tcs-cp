@@ -3,7 +3,7 @@ import SalesCard from "./SalesCard";
 
 const Cards = () => {
   return (
-    <div className="flex px-4 gap-4 media mx-auto">
+    <div className="flex flex-wrap px-4 gap-4 media mx-auto">
       <Card
         up
         icon="/icons/booked.svg"

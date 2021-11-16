@@ -8,7 +8,12 @@ import useVisible from "../hooks/useVisible";
 import moment from "moment";
 import Button from "./Button";
 
-const DateDropdown = ({ showDropdown, setShowDropdown }) => {
+const DateDropdown = ({
+  showDropdown,
+  setShowDropdown,
+  selected,
+  handleSelected,
+}) => {
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState([new Date(), new Date()]);
   const [custom, setCustom] = useState(false);
@@ -33,6 +38,7 @@ const DateDropdown = ({ showDropdown, setShowDropdown }) => {
     setVisible(false);
     setShowDropdown();
     setCustom(false);
+    handleSelected(range);
     if (range === "today") {
       var today = new Date();
       setValue([today, today]);
@@ -73,43 +79,57 @@ const DateDropdown = ({ showDropdown, setShowDropdown }) => {
           <div ref={ref} className="flex">
             <ul className="my-4 w-[11rem] ">
               <li
-                className="px-4 py-2 bg-[#F3F6F9]  hover:bg-[#F3F6F9]"
+                className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                  selected === "today" && "bg-[#F3F6F9]"
+                }`}
                 onClick={() => changeDate("today")}
               >
                 Today
               </li>
               <li
-                className="px-4 py-2  hover:bg-[#F3F6F9]"
+                className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                  selected === "yesterday" && "bg-[#F3F6F9]"
+                }`}
                 onClick={() => changeDate("yesterday")}
               >
                 Yesterday
               </li>
               <li
-                className="px-4 py-2  hover:bg-[#F3F6F9]"
+                className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                  selected === "last 7 days" && "bg-[#F3F6F9]"
+                }`}
                 onClick={() => changeDate("last 7 days")}
               >
                 Last 7 Days
               </li>
               <li
-                className="px-4 py-2  hover:bg-[#F3F6F9]"
+                className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                  selected === "last 30 days" && "bg-[#F3F6F9]"
+                }`}
                 onClick={() => changeDate("last 30 days")}
               >
                 Last 30 Days
               </li>
               <li
-                className="px-4 py-2  hover:bg-[#F3F6F9]"
+                className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                  selected === "this month" && "bg-[#F3F6F9]"
+                }`}
                 onClick={() => changeDate("this month")}
               >
                 This Month
               </li>
               <li
-                className="px-4 py-2  hover:bg-[#F3F6F9]"
+                className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                  selected === "last month" && "bg-[#F3F6F9]"
+                }`}
                 onClick={() => changeDate("last month")}
               >
                 Last Month
               </li>
               <li
-                className="px-4 py-2  hover:bg-[#F3F6F9]"
+                className={`px-4 py-2 hover:bg-[#F3F6F9] ${
+                  selected === "custom range" && "bg-[#F3F6F9]"
+                }`}
                 onClick={handleCustom}
               >
                 Custom Range
@@ -146,12 +166,21 @@ const DateDropdown = ({ showDropdown, setShowDropdown }) => {
                   color="#3A3A3A"
                   width="8rem"
                 />
-                <Button
-                  text="Apply"
-                  bgColor="#F3F6F9"
-                  color="#3A3A3A"
-                  width="8rem"
-                />
+                <div
+                  className=""
+                  onClick={handleSelected(
+                    moment(value[0]).format("L") +
+                      "-" +
+                      moment(value[1]).format("L")
+                  )}
+                >
+                  <Button
+                    text="Apply"
+                    bgColor="#F3F6F9"
+                    color="#3A3A3A"
+                    width="8rem"
+                  />
+                </div>
               </div>
             </div>
           )}

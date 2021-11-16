@@ -45,7 +45,7 @@ const Payment = () => {
   return (
     <div
       style={{ backgroundColor: "#F3F6F9" }}
-      className=" flex-col rounded-2xl gap-1 w-[27rem] border-0 py-4 px-6"
+      className=" flex-col rounded-2xl gap-1 w-full xl:w-[27rem] border-0 py-4 px-6"
     >
       <div className="flex justify-between items-center">
         <h2 className="heading">Payment History</h2>
