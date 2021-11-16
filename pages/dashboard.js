@@ -69,7 +69,7 @@ export default function Home() {
           </div>
         </div>
         <Cards />
-        <div className="flex gap-4 px-4 pt-4 media mx-auto ">
+        <div className="flex flex-col xl:flex-row gap-4 px-4 pt-4 media mx-auto flex-wrap">
           <Orders />
           <Payment />
         </div>

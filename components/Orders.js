@@ -57,7 +57,7 @@ const Orders = () => {
           />
         </div>
       </div>
-      <div className="flex justify-center ">
+      <div className="flex flex-col xl:flex-row justify-center ">
         <div className="flex-1 	">
           <PieChart />{" "}
         </div>
