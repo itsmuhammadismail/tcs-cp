@@ -25,31 +25,31 @@ const Login = () => {
   const [incorrect, setIncorrect] = useState(false);
 
   const handleLogin = async (username, password) => {
-    setIsLoading(true);
-    const res = await login(username, password);
-    console.log(res);
+    // setIsLoading(true);
+    // const res = await login(username, password);
+    // console.log(res);
 
-    if ("token" in res) {
-      localStorage.setItem("token", res.token);
-      setCookie("token", JSON.stringify(res), {
-        path: "/",
-        maxAge: 7200, // Expires after 2hr
-        sameSite: true,
-      });
-      const country = await Countries();
-      localStorage.setItem("countries", JSON.stringify(country));
-      const costCenters = await Costcenters();
-      localStorage.setItem("costcenters", JSON.stringify(costCenters));
-      const pkcities = await Cities(1);
-      localStorage.setItem("pkcities", JSON.stringify(pkcities));
+    // if ("token" in res) {
+    //   localStorage.setItem("token", res.token);
+    //   setCookie("token", JSON.stringify(res), {
+    //     path: "/",
+    //     maxAge: 7200, // Expires after 2hr
+    //     sameSite: true,
+    //   });
+    //   const country = await Countries();
+    //   localStorage.setItem("countries", JSON.stringify(country));
+    //   const costCenters = await Costcenters();
+    //   localStorage.setItem("costcenters", JSON.stringify(costCenters));
+    //   const pkcities = await Cities(1);
+    //   localStorage.setItem("pkcities", JSON.stringify(pkcities));
       router.push("/dashboard");
-    } else {
-      setIsLoading(false);
-      setIncorrect(true);
-      setTimeout(() => {
-        setIncorrect(false);
-      }, 2000);
-    }
+    // } else {
+    //   setIsLoading(false);
+    //   setIncorrect(true);
+    //   setTimeout(() => {
+    //     setIncorrect(false);
+    //   }, 2000);
+    // }
   };
 
   const onSubmit = async (data) => {
@@ -96,7 +96,7 @@ const Login = () => {
               placeholder="Username or email address"
               id="username"
               className="rounded-md focus:outline-none text-xs p-3"
-              {...register("username", { required: true })}
+              // {...register("username", { required: true })}
             />
             {errors.username && (
               <span className="text-xs text-red-600">
@@ -113,7 +113,7 @@ const Login = () => {
               placeholder="Password"
               id="password"
               className="rounded-md focus:outline-none text-xs p-3"
-              {...register("password", { required: true })}
+              // {...register("password", { required: true })}
             />
             {errors.password && (
               <span className="text-xs text-red-600">Password is required</span>
